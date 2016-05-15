@@ -295,7 +295,22 @@ class ticket {
 					                            	from ticketstatus ts2
 				                            		where ts.ticketid = ts2.ticketid)) as status
 					from tickets t";   	
-		}				                            		                            			
+		} elseif ($status == 'mine') {
+			$sql = "select
+	   			t.id as ticketid,
+				t.clientnumber, 
+				t.comments, 
+				t.assigneduser,
+				(select ts.status 
+				 	from ticketstatus ts
+				 		where ts.ticketid = t.id
+						and ts.statusdate = (select max(ts2.statusdate)
+					                            	from ticketstatus ts2
+				                            		where ts.ticketid = ts2.ticketid)) as status
+					from tickets t
+						where t.assigneduser = '". $_SESSION['username'] ."'";
+		}
+				                            		                            			
 		
 				 
 		$result = $mysqli->query($sql);

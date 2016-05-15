@@ -74,7 +74,7 @@ echo '<br>';
         	}
         	elseif ($_GET['ticketId'] == 'mine') {
         		echo 'My Tickets'; 
-        		//ticket::displayTickets('all');
+        		ticket::displayTickets('mine');
         	}
         	elseif ($_GET['ticketId'] == 'open') { 
         		echo 'Open tickets';
@@ -184,10 +184,11 @@ echo '<br>';
 			                <div class="form-group">
 			                    <label for="assignedUser" class="col-sm-2 control-label">Assigned User:</label>
 			                    <div class="col-sm-10">
-			        		<select class="form-control" name="assignedUser">
-			        			<option value="' . $ticket->getAssignedUser(). '">' . $ticket->getAssignedUser() . '</option>
-			        			<option value="pparker">Peter Parker</option>	
-			        			<option value="jshmucatelli">Joe Shmucatelli</option>				   
+			        		<select class="form-control" name="assignedUser">			        			
+			        			<option value="' . $ticket->getAssignedUser(). '">' . $ticket->getAssignedUser() . '</option>';
+			   				user::displayUserOptionList();
+			   						
+			   			echo'	 
 			        		</select>
 			                    </div>
 			                </div>	

@@ -323,3 +323,6 @@
 [14-May-2016 11:01:00 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdesk/include/functions.php on line 127
 [14-May-2016 11:01:44 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdesk/include/functions.php on line 127
 [14-May-2016 17:02:20 UTC] PHP Fatal error:  Call to undefined function sec_session_start() in /home/joevegan/public_html/ticketdesk/main.php on line 3
+[15-May-2016 01:46:58 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdesk/include/report.php on line 64
+[15-May-2016 05:02:16 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdesk/include/report.php on line 64
+[15-May-2016 06:10:49 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdesk/include/report.php on line 64
