@@ -172,10 +172,9 @@ class ticket {
    	 */
    	public function addNote($note) {
 		//insert status update
-		$user = 'testuser-addNote';
 		$sql = "insert into ticketnotes (ticketId,note,notedate,user) values (?,?,now(),?)";
 		if ($insert_stmt = $this->mysqli->prepare($sql)) {
-			$insert_stmt->bind_param('iss',$this->id,$note,$user);
+			$insert_stmt->bind_param('iss',$this->id,$note,$_SESSION['username']);
 			if (! $insert_stmt->execute()) {	
 				return false;
 			}

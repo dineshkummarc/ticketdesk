@@ -9,14 +9,14 @@ class system {
 	private $mysqli;
 	
 	
-	function __consturct() {
+	function __construct() {
 		$this->mysqli = dbConnect();
 	}
 	
+	public function getSystemSetting($settingName) {
 	
-	public function getSystemSetting($id) {
-		$this->id = $id;
-		$sql = "select * from system where id =" . $this->id;
+		$this->name = $settingName;
+		$sql = "select * from system where name = '" . $this->name . "'";
 		$result = $this->mysqli->query($sql);
 		
 		if ($result->num_rows > 0) {
@@ -26,6 +26,7 @@ class system {
 				$this->value = $row['value'];
 			}
 		}
+		
 	
 	}
 	public static function displaySettings() {

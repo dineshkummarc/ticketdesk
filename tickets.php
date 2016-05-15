@@ -29,8 +29,27 @@ if (isset($_POST['updateTicket'])) {
 	$ticket->getTicket($_POST['ticketId']);
 	$ticket->setAssignedUser($_POST['assignedUser']);
 	$ticket->setStatus($_POST['status']);
-	if($_POST['ticketNote'] != "") {
+	if ($_POST['ticketNote'] != "") {
 		$ticket->addNote($_POST['ticketNote']);
+	}
+	if ($_POST['previousAssignedUser'] != $_POST['assignedUser']) {
+		$user = user::withUserName($_SESSION['username']);
+		
+		$system = new system();
+		$settingName = 'system email';
+		$system->getSystemSetting($settingName);
+		$fromEmail = $system->getValue();
+		
+		$message = "You've been assigned a ticket!";
+		$to = $user->getEmail();
+		$subject="Ticketdesk - Ticket Assignment";
+		$from = $fromEmail;
+		$body ='Hi ' .$ticket->getAssignedUser() . ', <br/> <br/>Ticket id: '. $ticket->getId() .' has been assigned to you Click <a href="http://www.devmonkeyz.com/ticketdesk/tickets.php?ticketId='. $ticket->getId() . '">here</a> to view the ticket<br/>';
+		$headers = "From: " . strip_tags($from) . "\r\n";
+		$headers .= "Reply-To: ". strip_tags($from) . "\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		mail($to,$subject,$body,$headers);
 	}
 	if ($ticket->updateTicket()) {
 	
@@ -109,6 +128,7 @@ echo '<br>';
         		echo '<div class="well">
 				<form class="form" method="POST">
 					<input type="text" name="ticketId" value="' .$ticket->getId() . '" hidden />
+					<input type="text" name="previousAssignedUser" value="' .$ticket->getAssignedUser() . '" hidden />
 			                <div class="form-group">
 			                    <label for="ticketNumber" class="col-sm-2 control-label">Ticket#:</label>
 			                    <div class="col-sm-10"> 
