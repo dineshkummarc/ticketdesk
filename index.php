@@ -5,7 +5,8 @@ include_once 'include/functions.php';
 sec_session_start();
  
 if (login_check(dbConnect()) == true) {
-    $logged = 'in';
+    #$logged = 'in';
+    header('location: main.php');
 } else {
     $logged = 'out';
 }
