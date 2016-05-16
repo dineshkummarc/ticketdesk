@@ -16,14 +16,14 @@ if(isset($_GET['action'])) {
 
             $_SESSION['encryptId'] = $encrypt; // store the encrypted id
         } else {
-            $message = 'Invalid key please try again. <a href="http://devmonkeyz.com/ticketdesk/reset.php">Forget Password?</a>';
+            $message = 'Invalid key please try again. <a href="../reset.php">Forget Password?</a>';
         }
     }
 } elseif(isset($_POST['p'])) {
     
     //$encrypt = mysqli_real_escape_string($mysqli,$_GET['action']);
-    $encrypt = $_SESSION['encryptId'];
-    $password = $_POST['p'];
+    $encrypt = mysqli_real_escape_string($mysqli, $_SESSION['encryptId']);
+    $password = mysqli_real_escape_string($mysqli, $_POST['p']);
     
     $query = "SELECT id FROM users where md5(1290*3+id)='".$encrypt."'";
 
@@ -35,17 +35,17 @@ if(isset($_GET['action'])) {
  
         // Create salted password 
         $password = hash('sha512', $password . $random_salt);
-    
+
         $query = "update users set password='$password', salt='$random_salt' where id=" . $Results['id'];
         mysqli_query($mysqli,$query);
 
-        $message = 'Your password changed sucessfully <a href="http://devmonkeyz.com/ticketdesk/index.php">click here to login</a>.';
+        $message = 'Your password changed sucessfully <a href="../index.php">click here to login</a>.';
     } else {
-        $message = 'Update failed. <a href="http://devmonkeyz.com/ticketdesk/reset.php">Forget Password?</a>';
+        $message = 'Update failed. <a href="../reset.php">Forget Password?</a>';
     }
 }
 else {
-    header("location: devmonkeyz.com/ticketdesk/index.php");
+    header("location: ../index.php");
 }
 
 ?>
@@ -57,8 +57,8 @@ else {
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 
-<script type="text/JavaScript" src="/doclock/js/sha512.js"></script> 
-<script type="text/JavaScript" src="/doclock/js/forms.js"></script>
+<script type="text/JavaScript" src="../js/sha512.js"></script>
+<script type="text/JavaScript" src="../js/forms.js"></script>
 
 <div id="loginPanel" class="panel panel-default">
   <div class="panel-heading"> Reset Password</div>
@@ -68,7 +68,7 @@ else {
 	        <p class="alert alert-info"> <?php echo '' . $message; ?> </p>
 	    <?php } ?> 
 	
-		<form action="/doclock/includes/process_reset.php" method="post" id="resetPasswordForm" >
+		<form action="process_reset.php" method="post" id="resetPasswordForm" >
 	        <div class="form-group">
 	            <label class="col-sm-2 control-label">Password</label>
 	            <div class="col-sm-10">		         
