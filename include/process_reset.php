@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 include_once('connect.php');
 
 
@@ -16,7 +18,9 @@ if(isset($_GET['action'])) {
 
             $_SESSION['encryptId'] = $encrypt; // store the encrypted id
         } else {
+            unset($_SESSION['encryptId']);
             $message = 'Invalid key please try again. <a href="../reset.php">Forget Password?</a>';
+
         }
     }
 } elseif(isset($_POST['p'])) {
@@ -41,6 +45,7 @@ if(isset($_GET['action'])) {
 
         $message = 'Your password changed sucessfully <a href="../index.php">click here to login</a>.';
     } else {
+        unset($_SESSION['encryptId']);
         $message = 'Update failed. <a href="../reset.php">Forget Password?</a>';
     }
 }
@@ -49,13 +54,13 @@ else {
 }
 
 ?>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../style.css" rel="stylesheet">
 
 <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <script type="text/JavaScript" src="../js/sha512.js"></script>
 <script type="text/JavaScript" src="../js/forms.js"></script>
@@ -66,8 +71,9 @@ else {
 		
 		<?php if (isset($message)) { ?>
 	        <p class="alert alert-info"> <?php echo '' . $message; ?> </p>
-	    <?php } ?> 
-	
+	    <?php } ?>
+
+        <?php if (isset($_SESSION['encryptId'])) {?>
 		<form action="process_reset.php" method="post" id="resetPasswordForm" >
 	        <div class="form-group">
 	            <label class="col-sm-2 control-label">Password</label>
@@ -94,6 +100,7 @@ else {
             </div> <!-- buttons div -->		
             
 		</form>
+        <?php } ?>
 		
 	</div>
 </div>

@@ -362,13 +362,15 @@ class ticket {
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
+				$comments = $row['comments'];
+				$comments = (strlen($comments) > 340) ? substr($comments, 0, 340) . '...' : $comments;
 				if ($row['status'] == 'Closed') { $class = "btn btn-danger";}
 				elseif ($row['status'] == 'Open') { $class = "btn btn-success";}
 				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
 				       			<td>' .$row['clientnumber'] .'</td>
-				       			<td>' . $row['comments']  .'</td>
+				       			<td>' . $comments  .'</td>
 				       			<td>' . $row['assigneduser'] . '</td>
 				       			<td><form method="POST" action="./tickets.php">
 				       				<input name="ticketId" value="' . $row['ticketid'] . '" type="text" hidden />

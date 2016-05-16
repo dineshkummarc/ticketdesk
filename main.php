@@ -92,7 +92,7 @@ if (isset($_POST['addQuickTicket'])) {
                 <div class="form-group">
                     <label for="comments" class="col-sm-2 control-label">Comments</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="comments" placeholder="blah blah blah... you get it!">
+                        <textarea class="form-control verticalonly" name="comments" placeholder="blah blah blah... you get it!"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
