@@ -21,7 +21,6 @@ $result = $mysqli->query($sql);
 
 $mysqli->close();
 
-
 if ($result->num_rows > 0) {
 	// output data of each row
 	 echo '<div class="form-group">
