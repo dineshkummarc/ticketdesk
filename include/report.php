@@ -1,8 +1,6 @@
 <?php
 include_once('connect.php');
 
-
-
 class report {
 	
 	private $mysqli;
@@ -12,7 +10,7 @@ class report {
 	private $clientId;
 	private $name;
 	
-	public function __construct() {
+	function __construct() {
 		$this->mysqli = dbConnect();
 	}
 	
@@ -34,15 +32,15 @@ class report {
 	
 	
 	public function createReport() {
-	 
-	    header('Content-Type: text/csv; charset=utf-8');
-	    header('Content-Disposition: attachment; filename='. $this->name. '.csv');
+	 	  
 	    $output = fopen('php://output', 'w');
-	    
+
 	    // output the column headings
-	    fputcsv($output, array('User', 'OpenDate','Status','clientId','Category','SubCategory','Notes'));
-	    $sql = 'select 
-			t.id, 
+	    fputcsv($output, array('TicketId','clientId','opendate', 'opened_by','assigned_to','details','Status','Category','SubCategory','Notes'));
+	   	/* # this sql is broken... fix it
+	      	$sql = "select 
+			t.id,
+			t.clientid, 
 			t.opendate,
 			t.user as opened_by, 
 			t.assigneduser as assigned_to, 
@@ -54,19 +52,23 @@ class report {
 				from tickets t, ticketnotes tn, categories c, subcategories sc,ticketstatus ts
 					where t.id = tn.ticketid
 					and ts.ticketid = t.id
-					and t.categoryid = c.id
-					and t.subcategoryid = sc.id';
-	    
-	    if ($stmt = mysqli_prepare($this->mysqli, $sql ) ) {
-	
-	        //mysqli_stmt_bind_param($stmt,"ss", $this->startDate,$this->endDate);
-	        $stmt->execute();
-	        $result = $stmt->get_result();
-	        while ($row = $result->fetch_assoc()) {
-	            fputcsv($output, $row);
-	        }
-	    }
+					and t.categoryid = public c.id
+					and t.subcategoryid = sc.id
+						order by t.opendate desc,tn.notedate";
+		*/
+		$sql ="select * from tickets";
+		$result = $this->mysqli->query($sql);
+		
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+		       		fputcsv($output, $row);
+			}
+		}
+	   
 	    mysqli_close($this->mysqli);  
+	
+	
 	
 	}
 	

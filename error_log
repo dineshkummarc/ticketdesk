@@ -341,3 +341,42 @@
 [15-May-2016 16:14:00 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home/joevegan/public_html/ticketdesk/include/user.php on line 23
 [15-May-2016 16:14:01 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home/joevegan/public_html/ticketdesk/include/user.php on line 23
 [15-May-2016 16:29:30 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home/joevegan/public_html/ticketdesk/include/system.php on line 20
+[17-May-2016 21:07:52 America/Denver] PHP Fatal error:  Call to undefined method ticket::setComments() in /home/joevegan/public_html/ticketdev/tickets.php on line 33
+[18-May-2016 20:20:28 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 64
+[18-May-2016 20:25:45 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 65
+[18-May-2016 20:26:36 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 65
+[18-May-2016 20:27:41 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 64
+[18-May-2016 20:27:50 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 64
+[18-May-2016 20:28:53 America/Denver] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/joevegan/public_html/ticketdev/include/report.php on line 64
+[18-May-2016 20:35:55 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/include/report.php on line 36
+[18-May-2016 20:35:55 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/include/report.php on line 37
+[18-May-2016 20:35:55 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 72
+[18-May-2016 20:37:17 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/reports.php on line 26
+[18-May-2016 20:37:17 America/Denver] PHP Fatal error:  Using $this when not in object context in /home/joevegan/public_html/ticketdev/reports.php on line 27
+[18-May-2016 20:39:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/reports.php on line 27
+[18-May-2016 20:39:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/reports.php on line 28
+[18-May-2016 20:39:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/include/report.php on line 36
+[18-May-2016 20:39:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/navbar.php:11) in /home/joevegan/public_html/ticketdev/include/report.php on line 37
+[18-May-2016 20:39:48 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 72
+[18-May-2016 20:41:36 America/Denver] PHP Fatal error:  Class 'report' not found in /home/joevegan/public_html/ticketdev/reports.php on line 15
+[18-May-2016 20:42:47 America/Denver] PHP Fatal error:  Class 'report' not found in /home/joevegan/public_html/ticketdev/reports.php on line 13
+[18-May-2016 20:44:12 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 72
+[18-May-2016 20:44:12 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:72) in /home/joevegan/public_html/ticketdev/reports.php on line 21
+[18-May-2016 20:44:12 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:72) in /home/joevegan/public_html/ticketdev/reports.php on line 22
+[18-May-2016 20:44:52 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 20:44:52 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 21
+[18-May-2016 20:44:52 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 22
+[18-May-2016 20:45:48 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 20:45:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 21
+[18-May-2016 20:45:48 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 22
+[18-May-2016 20:46:26 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 20:46:26 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 21
+[18-May-2016 20:46:26 America/Denver] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/joevegan/public_html/ticketdev/include/report.php:39) in /home/joevegan/public_html/ticketdev/reports.php on line 22
+[18-May-2016 20:47:40 America/Denver] PHP Warning:  fputcsv() expects at least 2 parameters, 1 given in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 20:48:11 America/Denver] PHP Notice:  Undefined variable: row in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 20:48:11 America/Denver] PHP Warning:  fputcsv() expects parameter 2 to be array, null given in /home/joevegan/public_html/ticketdev/include/report.php on line 69
+[18-May-2016 21:06:32 America/Denver] PHP Notice:  Undefined variable: mysqli in /home/joevegan/public_html/ticketdev/include/report.php on line 42
+[18-May-2016 21:06:32 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 42
+[18-May-2016 21:07:37 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 60
+[18-May-2016 21:09:00 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 61
+[18-May-2016 21:09:07 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 61

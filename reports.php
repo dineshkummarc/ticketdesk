@@ -4,33 +4,39 @@ include_once 'include/connect.php';
 sec_session_start(); 
 
 if(login_check(dbConnect()) == true) {
-	include_once('include/navbar.php');
 	include_once('include/report.php');
+
+	if(isset($_POST['createReport'])) {
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+	
+		header('Content-Type: text/csv; charset=utf-8');
+		header('Content-Disposition: attachment; filename='. $_POST['reportName']. '.csv');
+		
+		$report = new report();
+		$report->setName($_POST['reportName']); 
+	 	$report->setStartDate($_POST['startDate']);
+	 	$report->setEndDate($_POST['endDate']);
+		
+		$report->createReport(); // this is broken
+
+	
+	  
+	} 
+	// need to include navbar after posting to modify the headers--otherwise header already sent error.
+	include_once('include/navbar.php');
+
 
 	
         // Add your protected page content here!
 ?>
-
 
 <script>
 // set active menu bar 
 $("#dashboard").removeClass("active");
 $('#reports').addClass("active");
 </script> 
-
-<?php
-if(isset($_POST['createReport'])) {
-
-	$report = new report();
-	$report->setName($_POST['reportName']); 
- 	$report->setStartDate($_POST['startDate']);
- 	$report->setEndDate($_POST['endDate']);
- 	$report->createReport();
-  
-} 
-
-
-?>
 
 <div id="content">
     <div id="reportMain" class="panel panel-default">

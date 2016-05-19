@@ -29,6 +29,9 @@ if (isset($_POST['updateTicket'])) {
 	$ticket->getTicket($_POST['ticketId']);
 	$ticket->setAssignedUser($_POST['assignedUser']);
 	$ticket->setStatus($_POST['status']);
+	$ticket->setTransferDeptId($_POST['department']);
+	$ticket->setComments($_POST['comments']);
+	$ticket->setSubject($_POST['subject']);
 	if ($_POST['ticketNote'] != "") {
 		$ticket->addNote($_POST['ticketNote']);
 	}
@@ -148,7 +151,7 @@ echo '<br>';
 			                <div class="form-group">
 			                    <label for="subject" class="col-sm-2 control-label">Subject:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="subject" disabled type="text"  value="' . 
+			                    	<input class="form-control" name="subject" type="text"  value="' . 
 			                    	$ticket->getSubject() . '" />
 			                    </div>
 			                </div>				                
@@ -156,8 +159,8 @@ echo '<br>';
 			                <div class="form-group">
 			                    <label for="comments" class="col-sm-2 control-label">Description:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="comments" disabled type="text"  value="' . 
-			                    	$ticket->getComments() . '" />
+			                    	<textarea class="form-control verticalonly" name="comments" type="text" >'. 
+			                    	$ticket->getComments() .'</textarea>
 			                    </div>
 			                </div>	
 
@@ -204,6 +207,20 @@ echo '<br>';
 			                    <label for="ticketNote" class="col-sm-2 control-label">Add Notes:</label>
 			                    <div class="col-sm-10">
 			                        <textarea class="form-control" rows="5" name="ticketNote" id="ticketNote"></textarea>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <label for="department" class="col-sm-2 control-label">Assigned Department:</label>
+			                    <div class="col-sm-10">
+			        		<select class="form-control" name="department">';
+			        		$department = department::withId($ticket->getTransferDeptId());	
+        			
+			        		echo '	<option value="' . $department->getId() . '">' . $department->getName() . '</option>';
+			   				department::displayDepartmentsOptionList();
+			   						
+			   			echo '	 
+			        		</select>
 			                    </div>
 			                </div>
 			                

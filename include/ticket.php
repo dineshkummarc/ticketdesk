@@ -140,6 +140,8 @@ class ticket {
    		$prep_stmt = "update tickets 
    				set clientnumber = ?,
    				categoryid = ?,
+   				subject = ?,
+   				comments = ?,
    				subcategoryid = ?,
    				transferyn = ?, 
    				transferdeptid = ?,
@@ -147,8 +149,10 @@ class ticket {
    				assigneduser = ?
    					where id = ?";
 		if ($update_stmt = $this->mysqli->prepare($prep_stmt)) {
-			$update_stmt->bind_param('iiiiiisi', $this->clientNumber,
+			$update_stmt->bind_param('iissiiiisi', $this->clientNumber,
 						$this->categoryId,
+						$this->subject,
+						$this->comments,
 						$this->subCategoryId,
 						$this->transferYn,
 						$this->transferDeptId,
@@ -284,7 +288,8 @@ class ticket {
 				 		where ts.ticketid = t.id
 						and ts.statusdate = (select max(ts2.statusdate)
 					                            	from ticketstatus ts2
-				                            		where ts.ticketid = ts2.ticketid)) = '" . $status . "'";	
+				                            		where ts.ticketid = ts2.ticketid)) = '" . $status . "'
+					order by t.opendate desc";	
   		if ($status == 'all' ) {
 			 $sql = "select
 	   			t.id as ticketid,
@@ -297,7 +302,8 @@ class ticket {
 						and ts.statusdate = (select max(ts2.statusdate)
 					                            	from ticketstatus ts2
 				                            		where ts.ticketid = ts2.ticketid)) as status
-					from tickets t";   	
+					from tickets t
+						order by t.opendate desc";   	
 		} elseif ($status == 'mine') {
 			$sql = "select
 	   			t.id as ticketid,
@@ -311,7 +317,14 @@ class ticket {
 					                            	from ticketstatus ts2
 				                            		where ts.ticketid = ts2.ticketid)) as status
 					from tickets t
-						where t.assigneduser = '". $_SESSION['username'] ."'";
+						where t.assigneduser = '". $_SESSION['username'] ."'
+						and (select ts.status 
+				 	from ticketstatus ts
+				 		where ts.ticketid = t.id
+						and ts.statusdate = (select max(ts2.statusdate)
+					                            	from ticketstatus ts2
+				                            		where ts.ticketid = ts2.ticketid)) <> 'Closed'	
+							order by t.opendate desc";
 		}
 				                            		                            			
 		
@@ -352,7 +365,11 @@ class ticket {
    			t.id as ticketid,
 			t.clientnumber, 
 			t.comments, 
+			t.subject,
+			(select c.name from categories c where c.id = t.categoryid) as category,
+			(select sc.name from subcategories sc where sc.id = t.subcategoryid) as subcategory,
 			t.assigneduser,
+			
 			(select ts.status 
 			 	from ticketstatus ts
 			 		where ts.ticketid = t.id
@@ -362,19 +379,21 @@ class ticket {
 				from tickets t
 					order by opendate desc limit 5";
 		$result = $mysqli->query($sql);
-		echo '<table class="table"><th>Client#</th><th>Comments</th><th>Assigned</th><th>Status</th>';
+		echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
-				$comments = $row['comments'];
-				$comments = (strlen($comments) > 340) ? substr($comments, 0, 340) . '...' : $comments;
+				#$comments = $row['comments'];
+				#$comments = (strlen($comments) > 340) ? substr($comments, 0, 340) . '...' : $comments;
 				if ($row['status'] == 'Closed') { $class = "btn btn-danger";}
 				elseif ($row['status'] == 'Open') { $class = "btn btn-success";}
 				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
 				       			<td>' .$row['clientnumber'] .'</td>
-				       			<td>' . $comments  .'</td>
+				       			<td>' . $row['subject']  .'</td>
+				       			<td>' . $row['category']  .'</td>
+				       			<td>' . $row['subcategory']  .'</td>
 				       			<td>' . $row['assigneduser'] . '</td>
 				       			<td><form method="POST" action="./tickets.php">
 				       				<input name="ticketId" value="' . $row['ticketid'] . '" type="text" hidden />
@@ -394,6 +413,7 @@ class ticket {
 	public function setId($id) {$this->id = $id;}
 	public function setClientId($clientId) {$this->clientNumber = $clientId;}
 	public function setUser($user) {$this->user = $user;}
+	public function setComments($comments) {$this->comments = $comments;}
 	public function setSubject($subject) {$this->subject = $subject;}
 	public function setStatus($status) {$this->status = $status;}
 	public function setCategoryId($categoryId) {$this->categoryId = $categoryId;}

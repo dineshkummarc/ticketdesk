@@ -101,21 +101,6 @@ if (isset($_POST['addQuickTicket'])) {
                         <textarea class="form-control verticalonly" name="comments" placeholder="Detailed info for this ticket..."></textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="transferYn" class="col-sm-2 control-label">Transfer?</label>
-                    <div class="checkbox">
-                        <label><input name="transferYn" type="radio" value="1">Yes</label>
-                        <label><input name="transferYn" type="radio" value="0">No</label>
-                    </div>      
-                </div>
-                <div class="form-group">
-                    <label for="transferDept" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="transferDeptId">
-				<?php department::displayDepartmentsOptionList(); ?>                          
-                        </select>
-                    </div>
-                </div>
                 <div class="btn-group">
                     <button type="submit" name="addTicket" class="btn btn-primary">Create</button>
                     <button type="submit" name="addQuickTicket" class="btn btn-success">Create & Close</button>                
