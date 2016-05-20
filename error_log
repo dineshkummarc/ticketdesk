@@ -380,3 +380,7 @@
 [18-May-2016 21:07:37 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 60
 [18-May-2016 21:09:00 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 61
 [18-May-2016 21:09:07 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 61
+[19-May-2016 19:18:04 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 73
+[19-May-2016 19:30:53 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 73
+[19-May-2016 19:33:43 America/Denver] PHP Notice:  Undefined variable: result in /home/joevegan/public_html/ticketdev/include/report.php on line 72
+[19-May-2016 19:33:43 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 72

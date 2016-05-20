@@ -19,7 +19,26 @@ $('#tickets').addClass("active");
 
 </script> 
 
-<body>
+
+<body> 
+
+<nav class="navbar" style="top:50px; margin-bottom:-50px;" >
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+    	<li><a href="./main.php">New</a></li>                  
+	<li><a href="./tickets.php?ticketId=mine">My Tickets</a></li>                  
+	<li><a href="./tickets.php?ticketId=all">All</a></li>
+	<li><a href="./tickets.php?ticketId=open">Open</a></li>
+	<li><a href="./tickets.php?ticketId=woc">Waiting on Client</a></li>
+	<li><a href="./tickets.php?ticketId=woa">Waiting on Agent</a></li>
+	<li><a href="./tickets.php?ticketId=closed">Closed</a></li>
+
+    </ul>
+  </div>  
+</nav>
+
+  
+    
 <div id="content">
 
 <?php

@@ -8,6 +8,9 @@ class report {
 	private $endDate;
 	private $user;
 	private $clientId;
+	private $category;
+	private $subCategory;
+	private $status;
 	private $name;
 	
 	function __construct() {
@@ -21,6 +24,11 @@ class report {
 	public function getUser() {return $this->user;}
 	public function getClientId() {return $this->clientId;}
 	public function getName() {return $this->name;}
+	public function getCategory() {return $this->category;}
+	public function getSubCategory() {return $this->subCategory;}
+	public function getStatus() {return $this->status;}
+
+	
 	
 	// sets
 	public function setMysqli($mysqli) { $this->mysqli = $mysqli;}
@@ -29,6 +37,9 @@ class report {
 	public function setUser($user) {$this->user = $user;}
 	public function setClientId($clientId) {$this->clientId = $clientId;}
 	public function setName($name) {$this->name = $name;}
+	public function setCategory($category) { $this->category = $category;}
+	public function setSubCategory($subCategory) {$this->subCategory = $subCategory;}
+	public function setStatus($status) { $this->status = $status;}
 	
 	
 	public function createReport() {
@@ -37,14 +48,14 @@ class report {
 
 	    // output the column headings
 	    fputcsv($output, array('TicketId','clientId','opendate', 'opened_by','assigned_to','details','Status','Category','SubCategory','Notes'));
-	   	/* # this sql is broken... fix it
+
 	      	$sql = "select 
 			t.id,
-			t.clientid, 
+			t.clientnumber, 
 			t.opendate,
-			t.user as opened_by, 
-			t.assigneduser as assigned_to, 
-			t.comments as ticket_details, 
+			t.user, 
+			t.assigneduser, 
+			t.comments, 
 			ts.status,
 			ts.statusdate,
 			tn.note, 
@@ -52,11 +63,10 @@ class report {
 				from tickets t, ticketnotes tn, categories c, subcategories sc,ticketstatus ts
 					where t.id = tn.ticketid
 					and ts.ticketid = t.id
-					and t.categoryid = public c.id
+					and t.categoryid = c.id
 					and t.subcategoryid = sc.id
 						order by t.opendate desc,tn.notedate";
-		*/
-		$sql ="select * from tickets";
+				
 		$result = $this->mysqli->query($sql);
 		
 		if ($result->num_rows > 0) {
@@ -65,6 +75,7 @@ class report {
 		       		fputcsv($output, $row);
 			}
 		}
+		
 	   
 	    mysqli_close($this->mysqli);  
 	

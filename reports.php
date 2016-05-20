@@ -18,6 +18,11 @@ if(login_check(dbConnect()) == true) {
 		$report->setName($_POST['reportName']); 
 	 	$report->setStartDate($_POST['startDate']);
 	 	$report->setEndDate($_POST['endDate']);
+	 	$report->setUser($_POST['openedBy']);
+	 	$report->setStatus($_POST['status']);
+	 	$report->setCategory($_POST['category']);
+	 	$report->setSubCategory($_POST['subCategory']);
+	 	
 		
 		$report->createReport(); // this is broken
 
@@ -55,13 +60,58 @@ $('#reports').addClass("active");
 		    <div class="col-sm-5">
 		      <input type="date" class="form-control" name="startDate" id="startDate" placeholder="yyyy-mm-dd">
 		    </div>
-		  </div>
+		  </div>		
+		  		  
 		  <div class="form-group row">
 		    <label for="endDate" class="col-sm-2 form-control-label">End Date</label>
 		    <div class="col-sm-5">
 		      <input type="date" class="form-control" name="endDate" id="endDate" placeholder="yyyy-mm-dd">
 		    </div>
 		  </div> 
+		  
+		  <div class="form-group row">
+		    <label for="openedBy" class="col-sm-2 form-control-label">Opened by</label>
+		    <div class="col-sm-5">
+		      <select class="form-control" id="openedBy" name="openedBy" >
+		      	<option value="">Select username...</option>
+		      	<option value="all">All</option>
+		      </select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label for="category" class="col-sm-2 form-control-label">Category</label>
+		    <div class="col-sm-5">
+		      <select class="form-control" id="category" name="category">
+		        <option value="all">All</option>
+			  <?php category::displayCategoryOptionList(); ?>
+	 	      </select>
+		    </div>
+		  </div>
+
+		  <div class="form-group row">
+		    <label for="subCategory" class="col-sm-2 form-control-label">Sub Category</label>
+		    <div class="col-sm-5">
+		      <select class="form-control" id="subCategory" name="subCategory">
+	                <option value="all">All</option>
+		      </select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label for="status" class="col-sm-2 form-control-label">Status</label>
+		    <div class="col-sm-5">
+		    <select class="form-control"  id="status" name="status">
+		    	<option value="all">All</option>
+		    	<option value="open">Open</option>
+		    	<option value="closed">Closed</option>
+		    	<option value="Waiting on agent">Waiting on Agent</option>
+		    	<option value="Waiting on client">Waiting on Client</option>
+		    	<option value="Waiting on 3rd Party">Waiting on 3rd Party</option>		    	
+		    </select>
+		    </div>
+		  </div>		  
+		  		  		  		  		  
 		  <div class="form-group row">
 		    <div class="col-sm-offset-2 col-sm-5">
 		      <button name="createReport" type="submit" class="btn btn-success">Create</button>
