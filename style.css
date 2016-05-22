@@ -21,7 +21,18 @@
 #displayTickets {
 
 }
-
+.subMenu {
+    top:40px; 
+    margin-bottom:-50px;
+    height:40px;
+    min-height:0px;
+    padding:0px;
+    z-index:0; 
+}
+.submenu > .navbar-inner .navbar-nav > .active > a,  
+.navbar-inverse .navbar-nav > .active > a:focus {
+    height:40px;
+}
 .verticalonly{
     width:100%;
     resize:vertical;
