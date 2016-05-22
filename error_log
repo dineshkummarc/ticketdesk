@@ -385,3 +385,120 @@
 [19-May-2016 19:33:43 America/Denver] PHP Notice:  Undefined variable: result in /home/joevegan/public_html/ticketdev/include/report.php on line 72
 [19-May-2016 19:33:43 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/report.php on line 72
 [22-May-2016 14:14:38 America/Denver] PHP Fatal error:  Class 'phpticket' not found in /home/joevegan/public_html/ticketdev/tickets.php on line 134
+[22-May-2016 14:59:53 America/Denver] PHP Fatal error:  Call to undefined method ticket::getTransferDeptId() in /home/joevegan/public_html/ticketdev/tickets.php on line 223
+[22-May-2016 15:01:29 America/Denver] PHP Fatal error:  Call to undefined method ticket::getTransferDeptId() in /home/joevegan/public_html/ticketdev/tickets.php on line 223
+[22-May-2016 15:02:24 America/Denver] PHP Fatal error:  Call to undefined method ticket::getTransferDeptId() in /home/joevegan/public_html/ticketdev/tickets.php on line 223
+[22-May-2016 15:03:01 America/Denver] PHP Fatal error:  Call to undefined method ticket::getTransferDeptId() in /home/joevegan/public_html/ticketdev/tickets.php on line 223
+[22-May-2016 15:03:50 America/Denver] PHP Fatal error:  Cannot access empty property in /home/joevegan/public_html/ticketdev/include/ticket.php on line 436
+[22-May-2016 15:04:50 America/Denver] PHP Fatal error:  Call to undefined method ticket::setTransferDeptId() in /home/joevegan/public_html/ticketdev/tickets.php on line 54
+[22-May-2016 15:11:01 America/Denver] PHP Fatal error:  Cannot access empty property in /home/joevegan/public_html/ticketdev/include/ticket.php on line 436
+[22-May-2016 15:11:10 America/Denver] PHP Fatal error:  Cannot access empty property in /home/joevegan/public_html/ticketdev/include/ticket.php on line 436
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:19:51 America/Denver] PHP Warning:  Missing argument 1 for ticket::__construct(), called in /home/joevegan/public_html/ticketdev/tickets.php on line 135 and defined in /home/joevegan/public_html/ticketdev/include/ticket.php on line 40
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 41
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 42
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 43
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 44
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 45
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 46
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 47
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 48
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 49
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 50
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 51
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 52
+[22-May-2016 15:19:51 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:20:16 America/Denver] PHP Warning:  Missing argument 1 for ticket::__construct(), called in /home/joevegan/public_html/ticketdev/tickets.php on line 52 and defined in /home/joevegan/public_html/ticketdev/include/ticket.php on line 40
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 41
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 42
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 43
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 44
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 45
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 46
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 47
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 48
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 49
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 50
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 51
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 52
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:20:16 America/Denver] PHP Warning:  Missing argument 1 for ticket::__construct(), called in /home/joevegan/public_html/ticketdev/tickets.php on line 135 and defined in /home/joevegan/public_html/ticketdev/include/ticket.php on line 40
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 41
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 42
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 43
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 44
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 45
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 46
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 47
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 48
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 49
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 50
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 51
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Undefined variable: ticketParameters in /home/joevegan/public_html/ticketdev/include/ticket.php on line 52
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 22
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 130
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:20:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 199
+[22-May-2016 15:23:29 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 22
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 130
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:23:30 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 199
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 22
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 130
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:23:52 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 199
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 113
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 22
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/category.php on line 130
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:26:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/ticket.php on line 199
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:26:49 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 111
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 115
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 119
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 123
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 126
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
+[22-May-2016 15:26:54 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
+[22-May-2016 15:32:23 America/Denver] PHP Fatal error:  Using $this when not in object context in /home/joevegan/public_html/ticketdev/include/ticket.php on line 41

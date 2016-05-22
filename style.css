@@ -10,7 +10,7 @@
 }
 #content {
     width:95%;
-    margin: 100px auto;
+    margin: 90px auto;
     display:table;
 }
 #totals {
@@ -22,16 +22,16 @@
 
 }
 .subMenu {
-    top:40px; 
+    top:38px; 
     margin-bottom:-50px;
-    height:40px;
+    height:38px;
     min-height:0px;
     padding:0px;
-    z-index:0; 
+    z-index:100; 
 }
 .submenu > .navbar-inner .navbar-nav > .active > a,  
 .navbar-inverse .navbar-nav > .active > a:focus {
-    height:40px;
+    height:38px;
 }
 .verticalonly{
     width:100%;

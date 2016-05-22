@@ -7,7 +7,7 @@ echo '<br>user = '. $ticket->getUser();
 echo '<br>category = '. $ticket->getCategoryId();
 echo '<br>sub category = '. $ticket->getSubCategoryId();
 echo '<br>TransferYn = '. $ticket->getTransferYn();
-echo '<br>TransferDeptId = '. $ticket->getTransferDeptId();
+echo '<br>groupId = '. $ticket->getGroupId();
 echo '<br>OpenDate = '. $ticket->getOpenDate();
 echo '<br>Assigned User = '. $ticket->getAssignedUser();
 echo '<br>';
@@ -17,7 +17,7 @@ class ticket {
 
 	// instance vars
 	private $id;
-	private $clientNumber;
+	private $clientId;
 	private $user;
 	private $subject;
 	private $categoryId;
@@ -25,50 +25,50 @@ class ticket {
 	private $subCategoryId;	
 	private $comments;
 	private $transferYn;
-	private $transferDeptId;
+	private $groupId;
 	private $openDate;
 	private $parentTicketId;
 	private $assignedUser;
 	private $mysqli;
 	
-	public function __construct0() {
+	function __construct() {
 		$this->mysqli = dbConnect();
 	}
 
 	
-	
-	public function __construct($ticketParameters) {
-       		$this->id = $ticketParameters['id'];
-       		$this->clientNumber = $ticketParameters['clientNumber'];
-       		$this->user = $ticketParameters['user'];
-       		$this->subject = $ticketParameters['subject'];
-       		$this->categoryId = $ticketParameters['categoryId'];
-       		$this->subCategoryId = $ticketParameters['subCategoryId'];
-       		$this->comments = $ticketParameters['comments'];
-       		$this->transferYn = $ticketParameters['transferYn'];
-       		$this->transferDeptId = $ticketParameters['transferDeptId'];
-       		$this->openDate = $ticketParameters['openDate'];
-       		$this->parentTicketId = $ticketParameters['parentTicketId'];
-       		$this->assignedUser = $ticketParameters['assignedUser'];
-       		$this->mysqli = dbConnect();
+	public static function withParams($ticketParameters) {
+		$instance = new self();
+       		$instance->id = $ticketParameters['id'];
+       		$instance->clientId = $ticketParameters['clientId'];
+       		$instance->user = $ticketParameters['user'];
+       		$instance->subject = $ticketParameters['subject'];
+       		$instance->categoryId = $ticketParameters['categoryId'];
+       		$instance->subCategoryId = $ticketParameters['subCategoryId'];
+       		$instance->comments = $ticketParameters['comments'];
+       		$instance->transferYn = $ticketParameters['transferYn'];
+       		$instance->groupId = $ticketParameters['groupId'];
+       		$instance->openDate = $ticketParameters['openDate'];
+       		$instance->parentTicketId = $ticketParameters['parentTicketId'];
+       		$instance->assignedUser = $ticketParameters['assignedUser'];
+       		return $instance;
    	}
    	
    	/**
     	 * Adds the ticket to the database
    	 */
    	public function addTicket($isClosed) {
-		$prep_stmt = "insert into tickets (clientNumber,user,subject,categoryid,subcategoryid,comments,transferYn,transferDeptId,openDate,parentTicketId,assignedUser)" .
+		$prep_stmt = "insert into tickets (clientid,user,subject,categoryid,subcategoryid,comments,transferYn,groupId,openDate,parentTicketId,assignedUser)" .
 		 	     "values(?,?,?,?,?,?,?,?,NOW(),?,?)";
 		$parentTicketId = 0;
 		if ($insert_stmt = $this->mysqli->prepare($prep_stmt)) {
-			$insert_stmt->bind_param('issiisiiis',$this->clientNumber,
+			$insert_stmt->bind_param('issiisiiis',$this->clientId,
 						$this->user,
 						$this->subject,
 						$this->categoryId,						
 						$this->subCategoryId,
 						$this->comments,
 						$this->transferYn,
-						$this->transferDeptId,
+						$this->groupid,
 						$parentTicketId,
 						$this->user);
 			if (! $insert_stmt->execute()) {	
@@ -113,14 +113,14 @@ class ticket {
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
-		       		$this->clientNumber = $row['clientnumber'];
+		       		$this->clientId = $row['clientid'];
 		       		$this->user = $row['user'];
 		       		$this->subject = $row['subject'];
 		       		$this->categoryId = $row['categoryid'];
 		       		$this->subCategoryId = $row['subcategoryid'];
 		       		$this->comments = $row['comments'];
 		       		$this->transferYn = $row['transferyn'];
-		       		$this->transferDeptId = $row['transferdeptid'];
+		       		$this->groupId = $row['groupid'];
 		       		$this->openDate = $row['opendate'];
 		       		$this->parentTicketId = $row['parentticketid'];
 		       		$this->assignedUser = $row['assigneduser'];
@@ -138,24 +138,24 @@ class ticket {
    	 */
    	public function updateTicket() {
    		$prep_stmt = "update tickets 
-   				set clientnumber = ?,
+   				set clientid = ?,
    				categoryid = ?,
    				subject = ?,
    				comments = ?,
    				subcategoryid = ?,
    				transferyn = ?, 
-   				transferdeptid = ?,
+   				groupid = ?,
    				parentticketid = ?,
    				assigneduser = ?
    					where id = ?";
 		if ($update_stmt = $this->mysqli->prepare($prep_stmt)) {
-			$update_stmt->bind_param('iissiiiisi', $this->clientNumber,
+			$update_stmt->bind_param('iissiiiisi', $this->clientId,
 						$this->categoryId,
 						$this->subject,
 						$this->comments,
 						$this->subCategoryId,
 						$this->transferYn,
-						$this->transferDeptId,
+						$this->groupid,
 						$this->parentTicketId,
 						$this->assignedUser,
 						$this->id);
@@ -180,7 +180,7 @@ class ticket {
    	 */
    	public function addNote($note) {
 		//insert status update
-		$sql = "insert into ticketnotes (ticketId,note,notedate,user) values (?,?,now(),?)";
+		$sql = "insert into ticketnotes (ticketid,note,notedate,user) values (?,?,now(),?)";
 		if ($insert_stmt = $this->mysqli->prepare($sql)) {
 			$insert_stmt->bind_param('iss',$this->id,$note,$_SESSION['username']);
 			if (! $insert_stmt->execute()) {	
@@ -273,7 +273,7 @@ class ticket {
    		$mysqli = dbConnect();	
    		$sql = "select
    			t.id as ticketid,
-			t.clientnumber, 
+			t.clientid, 
 			t.comments, 
 			t.assigneduser,
 			(select ts.status 
@@ -293,7 +293,7 @@ class ticket {
   		if ($status == 'all' ) {
 			 $sql = "select
 	   			t.id as ticketid,
-				t.clientnumber, 
+				t.clientid, 
 				t.comments, 
 				t.assigneduser,
 				(select ts.status 
@@ -307,7 +307,7 @@ class ticket {
 		} elseif ($status == 'mine') {
 			$sql = "select
 	   			t.id as ticketid,
-				t.clientnumber, 
+				t.clientid, 
 				t.comments, 
 				t.assigneduser,
 				(select ts.status 
@@ -339,7 +339,7 @@ class ticket {
 				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
-				       			<td>' .$row['clientnumber'] .'</td>
+				       			<td>' .$row['clientid'] .'</td>
 				       			<td>' . $row['comments']  .'</td>
 				       			<td>' . $row['assigneduser'] . '</td>
 				       			<td><form method="POST" action="./tickets.php">
@@ -363,7 +363,7 @@ class ticket {
    		$mysqli = dbConnect();
    		$sql = "select
    			t.id as ticketid,
-			t.clientnumber, 
+			t.clientid, 
 			t.comments, 
 			t.subject,
 			(select c.name from categories c where c.id = t.categoryid) as category,
@@ -390,7 +390,7 @@ class ticket {
 				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
-				       			<td>' .$row['clientnumber'] .'</td>
+				       			<td>' .$row['clientid'] .'</td>
 				       			<td>' . $row['subject']  .'</td>
 				       			<td>' . $row['category']  .'</td>
 				       			<td>' . $row['subcategory']  .'</td>
@@ -411,7 +411,7 @@ class ticket {
    	
 	
 	public function setId($id) {$this->id = $id;}
-	public function setClientId($clientId) {$this->clientNumber = $clientId;}
+	public function setClientId($clientId) {$this->clientId = $clientId;}
 	public function setUser($user) {$this->user = $user;}
 	public function setComments($comments) {$this->comments = $comments;}
 	public function setSubject($subject) {$this->subject = $subject;}
@@ -419,13 +419,13 @@ class ticket {
 	public function setCategoryId($categoryId) {$this->categoryId = $categoryId;}
 	public function setSubCategoryId($subCategoryId) {$this->subCategoryId = $subCategoryId;}
 	public function setTransferYn($transferYn) {$this->transferYn = $transferYn;}
-	public function setTransferDeptId($transferDeptId) {$this->transferDeptId = $transferDeptId;}
+	public function setGroupId($groupId) {$this->groupId = $groupId;}
 	public function setOpenDate($openDate) {$this->openDate = $openDate;}
 	public function setParentTicketId($parentTicketId) {$this->parentTicketId = $parentTicketId;}
 	public function setAssignedUser($assignedUser) {$this->assignedUser = $assignedUser;}
 	
 	public function getId() {return	 $this->id;}
-	public function getClientId() {return $this->clientNumber;}
+	public function getClientId() {return $this->clientId;}
 	public function getUser() {return $this->user;}
 	public function getSubject() {return $this->subject;}
 	public function getComments() {return $this->comments;}
@@ -433,7 +433,7 @@ class ticket {
 	public function getCategoryId() {return $this->categoryId;}
 	public function getSubCategoryId() {return $this->subCategoryId;}
 	public function getTransferYn() {return $this->transferYn;}
-	public function getTransferDeptId() {return $this->transferDeptId;}
+	public function getGroupId() {return $this->groupId;}
 	public function getOpenDate() {return $this->openDate;}
 	public function getParentTicketId() {return $this->parentTicketId;}
 	public function getAssignedUser() {return $this->assignedUser;}

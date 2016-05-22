@@ -51,7 +51,7 @@ if (isset($_POST['updateTicket'])) {
 	$ticket->getTicket($_POST['ticketId']);
 	$ticket->setAssignedUser($_POST['assignedUser']);
 	$ticket->setStatus($_POST['status']);
-	$ticket->setTransferDeptId($_POST['department']);
+	$ticket->setGroupId($_POST['group']);
 	$ticket->setComments($_POST['comments']);
 	$ticket->setSubject($_POST['subject']);
 	if ($_POST['ticketNote'] != "") {
@@ -78,7 +78,9 @@ if (isset($_POST['updateTicket'])) {
 	}
 	if ($ticket->updateTicket()) {
 	
-		//echo 'ticket saved';
+		echo 'Ticket saved!';
+		echo '<META http-equiv="refresh" content="1;URL=./main.php">';        
+
 	} else {
 		echo 'update failed: ' . $ticket->getMysqli()->error;
 	}
@@ -103,8 +105,7 @@ echo '<br>';
 
 	<div id="displayTickets" class="panel panel-default">
         	<div class="panel-heading">Tickets</div>
-        	<?php if (isset($_POST['ticketId'])) { } ?>
-        	
+        	<?php if (isset($_POST['ticketId'])) { } ?>        	
 	        	
         	<?php if ($_GET['ticketId'] == 'all') { ?>
         		<script>$("#subMenuAll").addClass("active"); </script>
@@ -137,46 +138,46 @@ echo '<br>';
         		$category = new category();
         		$category->getCategory($ticket->getCategoryId());
         		$subcat = new subCategory();
-        		$subcat->getSubCategory($ticket->getSubCategoryId());        		        	        		
-        	?>
-        		// display and update notes...
+        		$subcat->getSubCategory($ticket->getSubCategoryId());  
+        		// display and update notes...      		        	        		
+        	?>        		
 			<div class="panel-body">
         			<div class="well">
 				<form class="form" method="POST">
-					<input type="text" name="ticketId" value="<?php $ticket->getId(); ?>" hidden />
-					<input type="text" name="previousAssignedUser" value="<?php $ticket->getAssignedUser();?>" hidden />
+					<input type="text" name="ticketId" value="<?php echo ''. $ticket->getId(); ?>" hidden />
+					<input type="text" name="previousAssignedUser" value="<?php echo '' . $ticket->getAssignedUser();?>" hidden />
 			                <div class="form-group">
-			                    <label for="ticketNumber" class="col-sm-2 control-label">Ticket#:</label>
+			                    <label for="ticketId" class="col-sm-2 control-label">Ticket# </label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="ticketNumber" type="text" disabled value="<?php $ticket->getId();?> " />
+			                    	<input class="form-control" name="ticketId" type="text" disabled value="<?php echo ''. $ticket->getId();?> " />
 			                    </div>
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="clientNumber" class="col-sm-2 control-label">Client# </label>
+			                    <label for="ClientId" class="col-sm-2 control-label">Client# </label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="clientNumber" type="text"  value="<?php $ticket->getClientId(); ?>" />
+			                    	<input class="form-control" name="ClientId" type="text"  value="<?php echo ''. $ticket->getClientId(); ?>" />
 			                    </div>
 			                </div>	
 
 			                <div class="form-group">
 			                    <label for="subject" class="col-sm-2 control-label">Subject:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="subject" type="text"  value=" <?php $ticket->getSubject(); ?>" />
+			                    	<input class="form-control" name="subject" type="text"  value=" <?php echo ''. $ticket->getSubject(); ?>" />
 			                    </div>
 			                </div>				                
 
 			                <div class="form-group">
 			                    <label for="comments" class="col-sm-2 control-label">Description:</label>
 			                    <div class="col-sm-10"> 
-			                    	<textarea class="form-control verticalonly" name="comments" type="text" > <?php	$ticket->getComments(); ?> </textarea>
+			                    	<textarea class="form-control verticalonly" name="comments" type="text" > <?php echo ''. $ticket->getComments(); ?> </textarea>
 			                    </div>
 			                </div>	
 
 			                <div class="form-group">
 			                    <label for="user" class="col-sm-2 control-label">Created By:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="user" disabled type="text"  value="<?php $ticket->getUser(); ?>" />
+			                    	<input class="form-control" name="user" disabled type="text"  value="<?php echo ''. $ticket->getUser(); ?>" />
 			                    </div>
 			                </div>	
 
@@ -184,14 +185,14 @@ echo '<br>';
 			                <div class="form-group">
 			                    <label for="category" class="col-sm-2 control-label">Category:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="category" disabled type="text"  value="<?php $category->getName(); ?>" />
+			                    	<input class="form-control" name="category" disabled type="text"  value="<?php echo ''. $category->getName(); ?>" />
 			                    </div> 
 			                </div>
 			                
 			                <div class="form-group">
 			                    <label for="subCategory" class="col-sm-2 control-label">Sub Category:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="subCategory" disabled type="text"  value=" <?php $subcat->getName(); ?>" />
+			                    	<input class="form-control" name="subCategory" disabled type="text"  value=" <?php echo ''. $subcat->getName(); ?>" />
 			                    </div>
 			                </div>	
 			                
@@ -199,7 +200,7 @@ echo '<br>';
 			                    <label for="status" class="col-sm-2 control-label">Status:</label>
 			                    <div class="col-sm-10"> 
 			                        <select class="form-control" name="status">
-			        			<option value="<?php $ticket->getStatus(); ?> "><?php $ticket->getStatus(); ?> </option>
+			        			<option value="<?php echo ''. $ticket->getStatus(); ?>"><?php echo ''. $ticket->getStatus(); ?> </option>
 			        			<option value="Closed">Closed</option>
 			        			<option value="Open">Open</option>
 			        			<option value="Waiting on Client">Waiting On Client</option>
@@ -217,11 +218,11 @@ echo '<br>';
 			                </div>
 			                
 			                <div class="form-group">
-			                    <label for="department" class="col-sm-2 control-label">Assigned Department:</label>
+			                    <label for="group" class="col-sm-2 control-label">Assigned group:</label>
 			                    <div class="col-sm-10">
-			        		<select class="form-control" name="department">
-			        			<?php $department = department::withId($ticket->getTransferDeptId()); ?>	        			
-			        			<option value="<?php $department->getId();?> "> <?php $department->getName(); ?> </option>
+			        		<select class="form-control" name="group">
+			        			<?php $department = department::withId($ticket->getGroupId()); ?>	        			
+			        			<option value="<?php echo ''. $department->getId(); ?> "> <?php echo ''. $department->getName(); ?> </option>
 			   				<?php department::displayDepartmentsOptionList(); ?>
 			   									   			
 			        		</select>
@@ -233,7 +234,7 @@ echo '<br>';
 			                    <label for="assignedUser" class="col-sm-2 control-label">Assigned User:</label>
 			                    <div class="col-sm-10">
 			        		<select class="form-control" name="assignedUser">			        			
-			        			<option value="<?php $ticket->getAssignedUser();?> "> <?php $ticket->getAssignedUser();?></option>
+			        			<option value="<?php echo ''. $ticket->getAssignedUser();?> "> <?php echo ''. $ticket->getAssignedUser();?></option>
 			   				<?php user::displayUserOptionList(); ?>
 			   									   		 
 			        		</select>
@@ -242,9 +243,9 @@ echo '<br>';
 
 					<button name="updateTicket" class="btn btn-primary" type="submit">Update</button>
 
-					
-	        		</div>	        		
+						        		        		
 	        		</form>
+	        		</div>	
 	        	</div>
 	        	<?php $ticket->getNotes();?>
 		<?php }	?>

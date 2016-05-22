@@ -42,8 +42,10 @@ $(document).ready(function($) {
 <div id="content">
 
 <?php
+
+
 if (isset($_POST['addTicket'])) {
-	$ticket = new ticket($_POST);
+	$ticket = ticket::withParams($_POST);
 	if (!$ticket->addTicket(false)) {
 		echo '<br> failed to add ticket: ' . $ticket->getMysqli()->error . '<br>';
 	} else {
@@ -54,7 +56,7 @@ if (isset($_POST['addTicket'])) {
 }
 
 if (isset($_POST['addQuickTicket'])) {
-	$ticket = new ticket($_POST);
+	$ticket = ticket::withParams($_POST);
 	if (!$ticket->addTicket(true)) {
 		echo '<br> failed to add ticket: ' . $ticket->getMysqli()->error . '<br>';
 	} else {
@@ -70,9 +72,9 @@ if (isset($_POST['addQuickTicket'])) {
             <form class="form-horizontal" method="POST" action="#">
                 <div class="form-group">
                     <input type="text" name="user" value="<?php echo '' . $_SESSION['username']; ?>" hidden />
-                    <label for="clientNumber" class="col-sm-2 control-label">Client #</label>
+                    <label for="clientId" class="col-sm-2 control-label">Client #</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="clientNumber" placeholder="e.g. 912752">
+                        <input type="text" class="form-control" name="clientId" placeholder="e.g. 912752">
                     </div>
                 </div>
                 <div class="form-group">

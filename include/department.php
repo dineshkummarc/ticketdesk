@@ -18,7 +18,7 @@ class department {
 	
 	}
 	public function getDepartment($id) {
-		$sql = "select * from departments where id = ". $id;
+		$sql = "select * from groups where id = ". $id;
 		
 		$result = $this->mysqli->query($sql);
 		
@@ -44,7 +44,7 @@ class department {
 	public static function displayDepartmentsOptionList() {
 		
 		$mysqli = dbConnect();
-		$sql = "select * from departments";
+		$sql = "select * from groups";
 		$result = $mysqli->query($sql);
 		echo '<option>Choose Department</option>';
 
