@@ -1,9 +1,6 @@
 # ticketdesk
 A central ticketing system for help desk or call center
 
-### demo site (latest stable) http://www.devmonkeyz.com/ticketdesk/ 
-### dev site (latest build github master) http://www.devmonkeyz.com/ticketdev/ 
-
 ## Install
 1. Set up a LAMP server
 2. Create a database in MySQL named:ticket32145 ...or whatever you want but then you'll need to edit /includes/connect.php appropriatley

@@ -1,11 +1,17 @@
 <?php
 
 include_once 'include/connect.php';
-include_once 'includes/header.php';
+include_once 'include/header.php';
+include_once 'include/system.php';
 
 unset($message);
-$mysqli = dbConnect();
+
 if($_POST['action']) {
+
+    $systemEmail = system::withName('system email');
+    $siteUrl = system::withName('siteurl');
+    $mysqli = dbConnect();
+
     $email = mysqli_real_escape_string($mysqli,$_POST['email']);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Validate email address
@@ -20,8 +26,8 @@ if($_POST['action']) {
             $message = "Your password reset link send to your e-mail address.";
             $to=$email;
             $subject="Forget Password";
-            $from = 'reset@ticketdesk.com';
-            $body='Hi, <br/> <br/>Your login ID is '.$Results['id'].' <br><br>Click <a href="http://devmonkeyz.com/ticketdesk/include/process_reset.php?encrypt='.$encrypt.'&action=reset">here</a> to reset your password <br/>';
+            $from = $systemEmail->getValue();
+            $body='Hi, <br/> <br/>Your login ID is '.$Results['id'].' <br><br>Click <a href="' .$siteUrl->getValue(). 'include/process_reset.php?encrypt='.$encrypt.'&action=reset">here</a> to reset your password <br/>';
             $headers = "From: " . strip_tags($from) . "\r\n";
             $headers .= "Reply-To: ". strip_tags($from) . "\r\n";
             $headers .= "MIME-Version: 1.0\r\n";

@@ -1,6 +1,4 @@
 <?php
-include_once('connect.php');
-
 
 class system {
 	private $id;
@@ -27,8 +25,15 @@ class system {
 			}
 		}
 		
-	
 	}
+   	
+	public static function withName($settingName) {
+		$instance = new self;
+		$instance->getSystemSetting($settingName);
+		return $instance;
+	}
+	
+
 	public static function displaySettings() {
 		$mysqli = dbConnect();
 		$sql = "select * from system";

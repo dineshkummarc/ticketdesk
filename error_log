@@ -502,3 +502,23 @@
 [22-May-2016 15:26:54 America/Denver] PHP Notice:  Undefined index: ticketId in /home/joevegan/public_html/ticketdev/tickets.php on line 130
 [22-May-2016 15:26:54 America/Denver] PHP Notice:  Trying to get property of non-object in /home/joevegan/public_html/ticketdev/include/department.php on line 25
 [22-May-2016 15:32:23 America/Denver] PHP Fatal error:  Using $this when not in object context in /home/joevegan/public_html/ticketdev/include/ticket.php on line 41
+[26-May-2016 22:13:36 America/Denver] PHP Fatal error:  Call to a member function getValue() on a non-object in /home/joevegan/public_html/ticketdev/system.php on line 104
+[26-May-2016 22:14:12 America/Denver] PHP Fatal error:  Call to a member function getValue() on a non-object in /home/joevegan/public_html/ticketdev/system.php on line 104
+[26-May-2016 22:14:50 America/Denver] PHP Fatal error:  Call to a member function getValue() on a non-object in /home/joevegan/public_html/ticketdev/system.php on line 104
+[31-May-2016 10:53:28 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:53:54 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:53:55 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:55:13 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 27
+[31-May-2016 10:57:13 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:57:17 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:57:20 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:58:04 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 10:59:25 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 26
+[31-May-2016 11:01:22 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 25
+[31-May-2016 11:01:54 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 25
+[31-May-2016 11:07:21 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 24
+[31-May-2016 11:07:28 America/Denver] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/joevegan/public_html/ticketdev/include/system.php on line 24
+[31-May-2016 11:10:53 America/Denver] PHP Fatal error:  Call to undefined method system::withName() in /home/joevegan/public_html/ticketdev/system.php on line 106
+[31-May-2016 17:17:19 UTC] PHP Fatal error:  Class 'system' not found in /home/joevegan/public_html/ticketdev/reset.php on line 10
+[31-May-2016 17:17:41 UTC] PHP Fatal error:  Class 'system' not found in /home/joevegan/public_html/ticketdev/reset.php on line 11
+[31-May-2016 17:17:56 UTC] PHP Fatal error:  Class 'system' not found in /home/joevegan/public_html/ticketdev/reset.php on line 11

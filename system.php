@@ -1,6 +1,7 @@
 <?php 
 include_once 'include/functions.php';
 include_once 'include/connect.php';
+
 sec_session_start(); 
 
 if(login_check(dbConnect()) == true) {
@@ -90,17 +91,72 @@ $(document).ready(function($) {
 </script> 
 
 <body>
+<?php
+if ($_GET['maintenace'] == 'users') {
+
+}
+if ($_GET['maintenace'] == 'system') { ?>
 <div id="content">
 		<div id="displayCategories" class="panel panel-default">
-        		<div class="panel-heading">Category Maintenace</div>
-	        	<?php 
-	        	if ($_GET['maintenace'] == 'users') {
-	        		echo 'user';
-	        	}
-	        	if ($_GET['maintenace'] == 'system') {
-	        		system::displaySettings();
-	        	}
-	        	if ($_GET['maintenace'] == 'categories') { ?>
+        		<div class="panel-heading">System Settings</div>	        	
+		        	<div class="panel-body">
+		   		<?php 
+		   			$systemV = system::withName('version'); 
+		   			$systemAuthentication = system::withName('Authentication'); 
+		   			$systemLanguage = system::withName('language'); 
+		   					   		
+		   		?>
+
+		        	<p>version <?php echo ''. $systemV->getValue(); ?></p>
+		        		
+				<form class="form" method="post">
+				  <div class="form-group">
+				    <label for="authentication" class="col-sm-3 control-label">Authentication</label>
+				      <div class="col-sm-8">
+					<select class="form-control" id="authentication" >
+						<option value="Native">Native</option>
+						<option value="LDAP">LDAP</option>
+					</select>
+				      </div>
+				  </div>
+				  
+				  				  
+				  <div class="form-group">
+				    <label for="email" class="col-sm-3 control-label">Notification Email</label>
+				      <div class="col-sm-8">
+					<input class="form-control" id="email" value="notify@ticketdesk.com" />
+				      </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="language" class="col-sm-3 control-label">language</label>
+				      <div class="col-sm-8">
+					<select class="form-control" id="language" >
+						<option value="English">English</option>
+					</select>
+				      </div>
+				  </div>
+				  
+				  <div class="form-group">
+				      <div class=" col-offset-sm-2 col-sm-8">
+				 	 <button class="btn btn-success" type="submit">Save</button>		  				  				  
+				      </div>
+				  </div>				  
+				  		
+				</form>
+				
+				</div> <!--/panel body -->
+		</div> <!-- /panel -->
+</div> <!-- /content -->
+
+	
+<?php } ?>
+
+<?php if ($_GET['maintenace'] == 'categories') { ?>
+<div id="content">
+		<div id="displayCategories" class="panel panel-default">
+        		<div class="panel-heading">Categories</div>
+	        	
 		        	<div class="panel-body">
 			        	<form class="form-inline" method="POST">
 						<div class="form-group">

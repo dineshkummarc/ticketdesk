@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 22, 2016 at 03:51 PM
+-- Generation Time: May 15, 2016 at 02:51 PM
 -- Server version: 5.5.45-cll-lve
 -- PHP Version: 5.4.31
 
@@ -32,52 +32,13 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
---
--- Table structure for table `clients`
---
-
-CREATE TABLE IF NOT EXISTS `clients` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(30) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `groupId` mediumint(9) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventlog`
+-- Table structure for table `departments`
 --
 
-CREATE TABLE IF NOT EXISTS `eventlog` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ticketid` bigint(20) NOT NULL,
-  `eventdate` datetime NOT NULL,
-  `oldclientid` bigint(20) DEFAULT NULL,
-  `oldsubject` varchar(255) DEFAULT NULL,
-  `oldcategoryid` bigint(20) DEFAULT NULL,
-  `oldsubcategoryid` bigint(20) DEFAULT NULL,
-  `oldassigneduser` varchar(30) DEFAULT NULL,
-  `oldparentticketid` bigint(20) DEFAULT NULL,
-  `oldgroupid` bigint(20) DEFAULT NULL,
-  `newclientid` bigint(20) DEFAULT NULL,
-  `newsubject` varchar(255) DEFAULT NULL,
-  `newcategoryid` bigint(20) DEFAULT NULL,
-  `newsubcategoryid` bigint(20) DEFAULT NULL,
-  `newassigneduser` varchar(30) DEFAULT NULL,
-  `newparentticketid` bigint(20) DEFAULT NULL,
-  `newgroupid` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `groups`
---
-
-CREATE TABLE IF NOT EXISTS `groups` (
+CREATE TABLE IF NOT EXISTS `departments` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -106,9 +67,6 @@ CREATE TABLE IF NOT EXISTS `subcategories` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `system`
 --
@@ -118,18 +76,7 @@ CREATE TABLE IF NOT EXISTS `system` (
   `name` varchar(50) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `system`
---
-
-INSERT INTO `system` (`id`, `name`, `value`) VALUES
-(1, 'version', '0.1'),
-(2, 'Authentication', 'Native'),
-(3, 'system email', 'notice@ticketdesk.com');
-
--- --------------------------------------------------------
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Table structure for table `ticketnotes`
@@ -142,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ticketnotes` (
   `user` varchar(30) NOT NULL,
   `notedate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=107 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Table structure for table `tickets`
@@ -150,21 +97,19 @@ CREATE TABLE IF NOT EXISTS `ticketnotes` (
 
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `clientid` bigint(20) DEFAULT NULL,
+  `clientnumber` bigint(20) DEFAULT NULL,
   `user` varchar(30) DEFAULT NULL,
-  `subject` varchar(255) DEFAULT NULL,
   `categoryid` bigint(20) NOT NULL,
   `subcategoryid` bigint(20) DEFAULT NULL,
   `comments` varchar(8000) DEFAULT NULL,
   `transferyn` tinyint(1) DEFAULT NULL,
-  `groupid` mediumint(9) DEFAULT NULL,
+  `transferdeptid` mediumint(9) DEFAULT NULL,
   `opendate` datetime NOT NULL,
   `parentticketid` bigint(20) DEFAULT '0',
   `assigneduser` varchar(30) DEFAULT NULL,
-  `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- Table structure for table `ticketstatus`
@@ -176,8 +121,7 @@ CREATE TABLE IF NOT EXISTS `ticketstatus` (
   `status` varchar(50) NOT NULL,
   `statusdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=310 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=183 ;
 
 --
 -- Table structure for table `users`
@@ -191,9 +135,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `groupid` mediumint(9) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

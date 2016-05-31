@@ -13,7 +13,7 @@ include_once('include/ticket.php');
 include_once('include/category.php');
 include_once('include/department.php');
 include_once('include/user.php');
-include_once('include/system.php');
+include_once('include/class.system.php');
 
 /*
 ini_set('display_errors', 1);
