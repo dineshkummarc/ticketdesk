@@ -4,7 +4,7 @@ include_once 'include/connect.php';
 sec_session_start(); 
 
 if(login_check(dbConnect()) == true) {
-	include_once('include/report.php');
+	include_once('include/class.report.php');
 
 	if(isset($_POST['createReport'])) {
 		ini_set('display_errors', 1);
