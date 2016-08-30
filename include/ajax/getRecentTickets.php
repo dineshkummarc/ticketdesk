@@ -9,6 +9,9 @@ if (!is_numeric($selectvalue)){
 	echo "Invalid Data";
 	exit;
 }
+
+echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
+
 $sql = "select
 	t.id as ticketid,
 	t.clientid, 
@@ -30,7 +33,7 @@ $sql .= " order by opendate desc limit 5";
 
 $result = $mysqli->query($sql);
 $mysqli->close();
-echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
+
 if ($result->num_rows > 0) {
 	// output data of each row
 	//echo '<table class="table"><th>Category</th><th>Subcategory</th><th></th>';
