@@ -359,8 +359,9 @@ class ticket {
    	/**
    	 * displays the most recent tickets
    	 */
-   	public static function displayRecentTickets() {
+   	public static function displayRecentTickets($clientId = null) {
    		$mysqli = dbConnect();
+   		
    		$sql = "select
    			t.id as ticketid,
 			t.clientid, 
@@ -369,15 +370,17 @@ class ticket {
 			(select c.name from categories c where c.id = t.categoryid) as category,
 			(select sc.name from subcategories sc where sc.id = t.subcategoryid) as subcategory,
 			t.assigneduser,
-			
 			(select ts.status 
 			 	from ticketstatus ts
 			 		where ts.ticketid = t.id
 					and ts.statusdate = (select max(ts2.statusdate)
 				                            	from ticketstatus ts2
 			                            		where ts.ticketid = ts2.ticketid)) as status
-				from tickets t
-					order by opendate desc limit 5";
+				from tickets t";
+					
+		if (clientId != null) $sql .= " where clientid =" . $clientId;
+		$sql .= " order by opendate desc limit 5";
+					
 		$result = $mysqli->query($sql);
 		echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
 		if ($result->num_rows > 0) {
