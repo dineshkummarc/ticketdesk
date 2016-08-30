@@ -41,13 +41,13 @@ $(document).ready(function($) {
  
     if (selectvalue == "") {
 		//Display initial prompt in target select if blank value selected
-	        $('#recentTickets').html("");
+	        $('#recentTicketsPanel').html("");
     } else {
       //Make AJAX request, using the selected value as the GET
       $.ajax({url: './include/ajax/getRecentTickets.php?svalue='+selectvalue,
              success: function(output) {
                 //alert(output);
-                $('#recentTickets').html(output);
+                $('#recentTicketsPanel').html(output);
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
@@ -138,9 +138,9 @@ if (isset($_POST['addQuickTicket'])) {
         
     <div id="recentTickets" class="panel panel-default">
         <div class="panel-heading">Recent Tickets</div>
-            <!-- <div class="panel-body"> -->
-            <?php ticket::displayRecentTickets(); ?>
-             <!--  </div> -->
+            <div id="recentTicketsPanel" class="panel-body">
+                <?php ticket::displayRecentTickets(); ?>
+            </div>
     </div>   
 <div id="totals" class="well welroundl-sm" >
 Total Tickets: <?php echo ''. ticket::getTicketCount(); ?> <br>  Average Daily: <?php echo ''. ticket::getDailyAverage(); ?>
