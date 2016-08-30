@@ -28,7 +28,7 @@ $sql = "select
 	                            		where ts.ticketid = ts2.ticketid)) as status
 		from tickets t";
 
-$sql .= " where clientid =" . $selectvalue;
+if (strlen($selectvalue) > 0) $sql .= " where clientid =" . $selectvalue;
 $sql .= " order by opendate desc limit 5";
 
 $result = $mysqli->query($sql);
