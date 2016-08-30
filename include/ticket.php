@@ -257,8 +257,7 @@ class ticket {
 			echo "0";
 		} 
 		$mysqli->close();
-		$totalNumberOfDays = date('m/d/Y') - date($startDate);
-		echo ''. $totalNumberOfDays;
+		$totalNumberOfDays =  date($startDate) - date('m/d/Y');
 		$average = round($numberOfTickets / $totalNumberOfDays);
 		return $average;
    	
