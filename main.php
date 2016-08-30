@@ -117,7 +117,7 @@ if (isset($_POST['addQuickTicket'])) {
     <div id="recentTickets" class="panel panel-default">
         <div class="panel-heading">Recent Tickets</div>
         <!-- <div class="panel-body"> -->
-            <?php ticket::displayRecentTickets(); ?>
+            <?php ticket::displayRecentTickets(123); ?>
        <!--  </div> -->
     </div>   
 <div id="totals" class="well welroundl-sm" >
