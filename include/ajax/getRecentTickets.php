@@ -5,13 +5,7 @@ $mysqli = dbConnect();
 
 $selectvalue =  $_GET['svalue'];
 
-if (!is_numeric($selectvalue)){
-	echo "Invalid Data";
-	exit;
-}
-
 echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
-
 $sql = "select
 	t.id as ticketid,
 	t.clientid, 
