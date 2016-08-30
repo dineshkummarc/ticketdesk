@@ -258,6 +258,7 @@ class ticket {
 		} 
 		$mysqli->close();
 		$totalNumberOfDays = date('m/d/Y') - date($startDate);
+		echo ''. $totalNumberOfDays;
 		$average = round($numberOfTickets / $totalNumberOfDays);
 		return $average;
    	
@@ -358,6 +359,7 @@ class ticket {
    	
    	/**
    	 * displays the most recent tickets
+   	 * @param clientId the client id to filter
    	 */
    	public static function displayRecentTickets($clientId = null) {
    		$mysqli = dbConnect();

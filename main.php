@@ -34,6 +34,28 @@ $(document).ready(function($) {
           }});
         }
     });
+    
+  $('#clientId').change(function(e) {
+    //Grab the chosen value on first select list change
+    var selectvalue = $(this).val();
+ 
+    if (selectvalue == "") {
+		//Display initial prompt in target select if blank value selected
+	        $('#recentTickets').html("");
+    } else {
+      //Make AJAX request, using the selected value as the GET
+      $.ajax({url: './include/ajax/getRecentTickets.php?svalue='+selectvalue,
+             success: function(output) {
+                //alert(output);
+                $('#recentTickets').html(output);
+            },
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + " "+ thrownError);
+          }});
+        }
+    });
+    
+    
 });
 
 </script> 
@@ -74,7 +96,7 @@ if (isset($_POST['addQuickTicket'])) {
                     <input type="text" name="user" value="<?php echo '' . $_SESSION['username']; ?>" hidden />
                     <label for="clientId" class="col-sm-2 control-label">Client #</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="clientId" placeholder="e.g. 912752">
+                        <input type="text" class="form-control" id="clientId" name="clientId" placeholder="e.g. 912752">
                     </div>
                 </div>
                 <div class="form-group">
@@ -116,9 +138,9 @@ if (isset($_POST['addQuickTicket'])) {
         
     <div id="recentTickets" class="panel panel-default">
         <div class="panel-heading">Recent Tickets</div>
-        <!-- <div class="panel-body"> -->
-            <?php ticket::displayRecentTickets(123); ?>
-       <!--  </div> -->
+            <!-- <div class="panel-body"> -->
+            <?php ticket::displayRecentTickets(); ?>
+             <!--  </div> -->
     </div>   
 <div id="totals" class="well welroundl-sm" >
 Total Tickets: <?php echo ''. ticket::getTicketCount(); ?> <br>  Average Daily: <?php echo ''. ticket::getDailyAverage(); ?>
