@@ -360,7 +360,7 @@ class ticket {
    	 * displays the most recent tickets
    	 * @param clientId the client id to filter
    	 */
-   	public static function displayRecentTickets($clientId = null) {
+   	public static function displayRecentTickets() {
    		$mysqli = dbConnect();
    		
    		$sql = "select
@@ -377,10 +377,8 @@ class ticket {
 					and ts.statusdate = (select max(ts2.statusdate)
 				                            	from ticketstatus ts2
 			                            		where ts.ticketid = ts2.ticketid)) as status
-				from tickets t";
-					
-		if (clientId != null) $sql .= " where clientid =" . $clientId;
-		$sql .= " order by opendate desc limit 5";
+				from tickets t
+				    order by opendate desc limit 5";
 					
 		$result = $mysqli->query($sql);
 		echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
@@ -406,7 +404,7 @@ class ticket {
 				       		</tr>';
 			}
 		} else {
-			echo "No Recent Tickets.";
+			echo "Enter ClientId to see recent tickets.";
 		}
 		echo '</table>'; 
 		$mysqli->close();

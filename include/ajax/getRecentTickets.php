@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 	}
 	//echo '</table>';
 } else {
-    echo "No Recent Tickets.";
+    echo "Enter ClientId to view recent tickets";
 }	
 echo '</table>'; 
 
