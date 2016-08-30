@@ -28,7 +28,7 @@ $sql = "select
 	                            		where ts.ticketid = ts2.ticketid)) as status
 		from tickets t";
 			
-if ($selectvalue != null) $sql .= " where clientid =" . $selectvalue;
+if ($selectvalue == null || $selectvalue = '') $sql .= " where clientid =" . $selectvalue;
 $sql .= " order by opendate desc limit 5";
 
 $result = $mysqli->query($sql);
@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 	}
 	//echo '</table>';
 } else {
-    ticket::displayRecentTickets();
+    echo "Enter ClientId to view recent tickets";
 }	
 echo '</table>'; 
 
