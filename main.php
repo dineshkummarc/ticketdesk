@@ -39,20 +39,14 @@ $(document).ready(function($) {
     //Grab the chosen value on first select list change
     var selectvalue = $(this).val();
  
-    if (selectvalue == "") {
-		//Display initial prompt in target select if blank value selected
-	        $('#recentTickets').html("");
-    } else {
-      //Make AJAX request, using the selected value as the GET
-      $.ajax({url: './include/ajax/getRecentTickets.php?svalue='+selectvalue,
-             success: function(output) {
-                //alert(output);
+    $.ajax({url: './include/ajax/getRecentTickets.php?svalue='+selectvalue,
+            success: function(output) {
+            //alert(output);
                 $('#recentTickets').html(output);
             },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-        }
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status + " "+ thrownError);
+            }});
     });
     
     
