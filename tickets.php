@@ -163,14 +163,14 @@ echo '<br>';
 			                <div class="form-group">
 			                    <label for="subject" class="col-sm-2 control-label">Subject:</label>
 			                    <div class="col-sm-10"> 
-			                    	<input class="form-control" name="subject" type="text"  value=" <?php echo ''. $ticket->getSubject(); ?>" />
+			                    	<input class="form-control" name="subject" type="text"  value="<?php echo ''. $ticket->getSubject(); ?>" />
 			                    </div>
 			                </div>				                
 
 			                <div class="form-group">
 			                    <label for="comments" class="col-sm-2 control-label">Description:</label>
 			                    <div class="col-sm-10"> 
-			                    	<textarea class="form-control verticalonly" name="comments" type="text" > <?php echo ''. $ticket->getComments(); ?> </textarea>
+			                    	<textarea class="form-control verticalonly" name="comments" type="text" ><?php echo ''. $ticket->getComments(); ?> </textarea>
 			                    </div>
 			                </div>	
 
