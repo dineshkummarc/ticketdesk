@@ -48,6 +48,11 @@ if (isset($_POST['saveSettings'])) {
 	$setting->setName('email');
 	$setting->setValue($_POST['email']);
 	$setting->update();
+
+	# save brand info
+	$setting->setName('brand');
+	$setting->setValue($_POST['brand']);
+	$setting->update();
 }
 
 ?>
@@ -101,6 +106,7 @@ if ($_GET['maintenace'] == 'system') { ?>
 		   			$systemAuthentication = system::withName('Authentication');
 		   			$systemLanguage = system::withName('language');
 						$systemEmail = system::withName('email');
+						$systemBrand = system::withName('brand'); # get branding for nav bar
 		   		?>
 
 		        	<p>version <?php echo ''. $systemV->getValue(); ?></p>
@@ -109,10 +115,10 @@ if ($_GET['maintenace'] == 'system') { ?>
 				  <div class="form-group">
 				    <label for="authentication" class="col-sm-3 control-label">Authentication</label>
 				      <div class="col-sm-8">
-					<select class="form-control" name="authentication" id="authentication" >
-						<option value="Native">Native</option>
-						<option value="LDAP">LDAP</option>
-					</select>
+								<select class="form-control" name="authentication" id="authentication" >
+									<option value="Native">Native</option>
+									<option value="LDAP">LDAP</option>
+								</select>
 				      </div>
 				  </div>
 
@@ -126,9 +132,16 @@ if ($_GET['maintenace'] == 'system') { ?>
 				  <div class="form-group">
 				    <label for="language" class="col-sm-3 control-label">language</label>
 				      <div class="col-sm-8">
-					<select class="form-control" name="language" id="language" >
-						<option value="English">English</option>
-					</select>
+								<select class="form-control" name="language" id="language" >
+									<option value="English">English</option>
+								</select>
+				      </div>
+				  </div>
+
+					<div class="form-group">
+				    <label for="brand" class="col-sm-3 control-label">Brand</label>
+				      <div class="col-sm-8">
+								<input class="form-control" name="brand" id="brand" value="<?php echo ''. $systemBrand->getValue(); ?>" />
 				      </div>
 				  </div>
 
