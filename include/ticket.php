@@ -22,7 +22,7 @@ class ticket {
 	private $subject;
 	private $categoryId;
 	private $status;
-	private $subCategoryId;	
+	private $subCategoryId;
 	private $comments;
 	private $transferYn;
 	private $groupId;
@@ -30,12 +30,12 @@ class ticket {
 	private $parentTicketId;
 	private $assignedUser;
 	private $mysqli;
-	
+
 	function __construct() {
 		$this->mysqli = dbConnect();
 	}
 
-	
+
 	public static function withParams($ticketParameters) {
 		$instance = new self();
        		$instance->id = $ticketParameters['id'];
@@ -52,98 +52,98 @@ class ticket {
        		$instance->assignedUser = $ticketParameters['assignedUser'];
        		return $instance;
    	}
-   	
+
    	/**
     	 * Adds the ticket to the database
    	 */
    	public function addTicket($isClosed) {
-		$prep_stmt = "insert into tickets (clientid,user,subject,categoryid,subcategoryid,comments,transferYn,groupId,openDate,parentTicketId,assignedUser)" .
-		 	     "values(?,?,?,?,?,?,?,?,NOW(),?,?)";
-		$parentTicketId = 0;
-		if ($insert_stmt = $this->mysqli->prepare($prep_stmt)) {
-			$insert_stmt->bind_param('issiisiiis',$this->clientId,
-						$this->user,
-						$this->subject,
-						$this->categoryId,						
-						$this->subCategoryId,
-						$this->comments,
-						$this->transferYn,
-						$this->groupid,
-						$parentTicketId,
-						$this->user);
-			if (! $insert_stmt->execute()) {	
-				return false;
-			} else {
-				$this->id = $this->mysqli->insert_id;
-				$status = 'Open';
-				if ($isClosed == true) { $status = 'Closed'; }				
-				$prep_stmt = "insert into ticketstatus (status,statusdate,ticketid) values(?,NOW(),?)";
-				if ($insert_stmt = $this->mysqli->prepare($prep_stmt)) {
-					$insert_stmt->bind_param('si',$status, $this->id);
-					
-					if (! $insert_stmt->execute()) {	
-						return false;
-					} 
+			$prep_stmt = "insert into tickets (clientid,user,subject,categoryid,subcategoryid,comments,transferYn,groupId,openDate,parentTicketId,assignedUser)" .
+			 	     "values(?,?,?,?,?,?,?,?,NOW(),?,?)";
+			$parentTicketId = 0;
+			if ($insert_stmt = $this->mysqli->prepare($prep_stmt)) {
+				$insert_stmt->bind_param('issiisiiis',$this->clientId,
+							$this->user,
+							$this->subject,
+							$this->categoryId,
+							$this->subCategoryId,
+							$this->comments,
+							$this->transferYn,
+							$this->groupid,
+							$parentTicketId,
+							$this->user);
+				if (! $insert_stmt->execute()) {
+					return false;
+				} else {
+					$this->id = $this->mysqli->insert_id;
+					$status = 'Open';
+					if ($isClosed == true) { $status = 'Closed'; }
+					$prep_stmt = "insert into ticketstatus (status,statusdate,ticketid) values(?,NOW(),?)";
+					if ($insert_stmt = $this->mysqli->prepare($prep_stmt)) {
+						$insert_stmt->bind_param('si',$status, $this->id);
+
+						if (! $insert_stmt->execute()) {
+							return false;
+						}
+					}
 				}
-			}
-		} return true;   	
+			} return true;
    	}
-   	
-   	
-   	
+
+
+
    	/**
    	 * get ticket by ticket Id
    	 */
    	public function getTicket($id) {
    		$this->id = $id;
-		//$sql = "select * from tickets where id = " . $this->id ;
-		$sql = "select
-   			t.*,
-			(select ts.status 
-			 	from ticketstatus ts
-			 		where ts.ticketid = t.id
-					and ts.statusdate = (select max(ts2.statusdate)
-				                            	from ticketstatus ts2
-				                            	where ts2.ticketid = ts.ticketid)) as status
-				from tickets t
-					where id = " . $this->id;
-		
-		$result = $this->mysqli->query($sql);
-		
-		if ($result->num_rows > 0) {
-			// output data of each row
-			while($row = $result->fetch_assoc()) {
-		       		$this->clientId = $row['clientid'];
-		       		$this->user = $row['user'];
-		       		$this->subject = $row['subject'];
-		       		$this->categoryId = $row['categoryid'];
-		       		$this->subCategoryId = $row['subcategoryid'];
-		       		$this->comments = $row['comments'];
-		       		$this->transferYn = $row['transferyn'];
-		       		$this->groupId = $row['groupid'];
-		       		$this->openDate = $row['opendate'];
-		       		$this->parentTicketId = $row['parentticketid'];
-		       		$this->assignedUser = $row['assigneduser'];
-		       		$this->status = $row['status'];	
-			}
-		} else {
+			//$sql = "select * from tickets where id = " . $this->id ;
+			$sql = "select
+	   					t.*,
+							(select ts.status
+							 	from ticketstatus ts
+							 		where ts.ticketid = t.id
+									and ts.statusdate = (select max(ts2.statusdate)
+								                            	from ticketstatus ts2
+								                            	where ts2.ticketid = ts.ticketid)) as status
+							from tickets t
+								where id = " . $this->id;
+
+			$result = $this->mysqli->query($sql);
+
+			if ($result->num_rows > 0) {
+				// output data of each row
+				 while($row = $result->fetch_assoc()) {
+			       		$this->clientId = $row['clientid'];
+			       		$this->user = $row['user'];
+			       		$this->subject = $row['subject'];
+			       		$this->categoryId = $row['categoryid'];
+			       		$this->subCategoryId = $row['subcategoryid'];
+			       		$this->comments = $row['comments'];
+			       		$this->transferYn = $row['transferyn'];
+			       		$this->groupId = $row['groupid'];
+			       		$this->openDate = $row['opendate'];
+			       		$this->parentTicketId = $row['parentticketid'];
+			       		$this->assignedUser = $row['assigneduser'];
+			       		$this->status = $row['status'];
+			  }
+		 } else {
 			echo "No ticket with that id...";
-		}   		
-   		
-   	}
- 
-   	
+		 }
+
+   }
+
+
    	/**
-   	 * update the ticket info 
+   	 * update the ticket info
    	 */
    	public function updateTicket() {
-   		$prep_stmt = "update tickets 
+   		$prep_stmt = "update tickets
    				set clientid = ?,
    				categoryid = ?,
    				subject = ?,
    				comments = ?,
    				subcategoryid = ?,
-   				transferyn = ?, 
+   				transferyn = ?,
    				groupid = ?,
    				parentticketid = ?,
    				assigneduser = ?
@@ -159,22 +159,22 @@ class ticket {
 						$this->parentTicketId,
 						$this->assignedUser,
 						$this->id);
-			if (! $update_stmt->execute()) {	
+			if (! $update_stmt->execute()) {
 				return false;
 			} else {
 				//insert status update
 				$sql = "insert into ticketstatus (ticketId,status,statusdate) values (?,?,now())";
 				if ($insert_stmt = $this->mysqli->prepare($sql)) {
 					$insert_stmt->bind_param('is',$this->id,$this->status);
-					if (! $insert_stmt->execute()) {	
+					if (! $insert_stmt->execute()) {
 						return false;
 					}
 				}
 			}
 		}
-		return true;   
-   	} 
-   	
+		return true;
+   	}
+
    	/**
    	 * adds a ticket note to the ticket
    	 */
@@ -183,24 +183,24 @@ class ticket {
 		$sql = "insert into ticketnotes (ticketid,note,notedate,user) values (?,?,now(),?)";
 		if ($insert_stmt = $this->mysqli->prepare($sql)) {
 			$insert_stmt->bind_param('iss',$this->id,$note,$_SESSION['username']);
-			if (! $insert_stmt->execute()) {	
+			if (! $insert_stmt->execute()) {
 				return false;
 			}
 		}
    	}
-   	
+
    	/**
    	 * get all notes
    	 */
    	 public function getNotes() {
    	 	$sql = "select * from ticketnotes where ticketid =" . $this->id;
 		$result = $this->mysqli->query($sql);
-		
+
 		if ($result->num_rows > 0) {
 			// output data of each row
 			echo '<table class="table"><th>Note</th><th>User</th><th>Date</th>';
 			while($row = $result->fetch_assoc()) {
-		       		echo '<tr><td>' .$row['note'] . 
+		       		echo '<tr><td>' .$row['note'] .
 		       		'</td><td>' . $row['user'] .
 		       		'</td><td> ' . $row['notedate'] .
 		       		'</td></tr>';
@@ -208,23 +208,23 @@ class ticket {
 			echo '</table>';
 		} else {
 			echo "No additional notes.";
-		}  
+		}
    	 }
-   	
+
 	function __destruct() {
        		mysqli_close($this->mysqli);
 
    	}
-   	
+
    	/**
    	 * Gets the total number of tickets in the system
    	 *
    	 */
-   	public static function getTicketCount() { 
+   	public static function getTicketCount() {
    		$mysqli = dbConnect();
    		$sql = "select count(*) as numberOfTickets from tickets";
 		$result = $mysqli->query($sql);
-		
+
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
@@ -232,85 +232,83 @@ class ticket {
 			}
 		} else {
 			echo "0";
-		}  
+		}
 		$mysqli->close();
-   	
+
    	}
    	/**
    	 * gets the average number of tickets daily
    	 *
    	 */
-   	 public static function getDailyAverage() { 
-   	 	$numberOfTickets = ticket::getTicketCount();
-   	 	$startDate = "";
-   	 	
-   		$mysqli = dbConnect();
-   		$sql = "select min(opendate) as startDate from tickets";
-		$result = $mysqli->query($sql);
-		
-		if ($result->num_rows > 0) {
-			// output data of each row
-			while($row = $result->fetch_assoc()) {
-		       		$startDate = $row['startDate'];
-			}
-		} else {
-			echo "0";
-		} 
-		$mysqli->close();
-		$totalNumberOfDays =  date($startDate) - date('m/d/Y');
-		$average = round($numberOfTickets / $totalNumberOfDays);
-		return $average;
-   	
-   	}
-   	
-   	
+		 public static function getDailyAverage() {
+				$numberOfTickets = ticket::getTicketCount();
+				$startDate = "";
+
+				$mysqli = dbConnect();
+				$sql = "select round(count(*) / (date(now()) - date(min(opendate))),2) as average	from tickets";
+				$result = $mysqli->query($sql);
+
+				if ($result->num_rows > 0) {
+					// output data of each row
+					while($row = $result->fetch_assoc()) {
+						$average = $row['average'];
+					}
+				} else {
+					echo "0";
+				}
+				$mysqli->close();
+				return $average;
+
+		}
+
+
    	/**
    	 * displays lists of tickets
    	 *
    	 */
-   	
+
    	public static function displayTickets($status) {
-   		$mysqli = dbConnect();	
+   		$mysqli = dbConnect();
    		$sql = "select
    			t.id as ticketid,
-			t.clientid, 
-			t.comments, 
+			t.clientid,
+			t.comments,
 			t.assigneduser,
-			(select ts.status 
+			(select ts.status
 			 	from ticketstatus ts
 			 		where ts.ticketid = t.id
 					and ts.statusdate = (select max(ts2.statusdate)
 				                            	from ticketstatus ts2
 			                            		where ts.ticketid = ts2.ticketid)) as status
 				from tickets t
-			 		 where (select ts.status 
+			 		 where (select ts.status
 			 			from ticketstatus ts
 				 		where ts.ticketid = t.id
 						and ts.statusdate = (select max(ts2.statusdate)
 					                            	from ticketstatus ts2
 				                            		where ts.ticketid = ts2.ticketid)) = '" . $status . "'
-					order by t.opendate desc";	
+					order by t.opendate desc";
   		if ($status == 'all' ) {
 			 $sql = "select
 	   			t.id as ticketid,
-				t.clientid, 
-				t.comments, 
+				t.clientid,
+				t.comments,
 				t.assigneduser,
-				(select ts.status 
+				(select ts.status
 				 	from ticketstatus ts
 				 		where ts.ticketid = t.id
 						and ts.statusdate = (select max(ts2.statusdate)
 					                            	from ticketstatus ts2
 				                            		where ts.ticketid = ts2.ticketid)) as status
 					from tickets t
-						order by t.opendate desc";   	
+						order by t.opendate desc";
 		} elseif ($status == 'mine') {
 			$sql = "select
 	   			t.id as ticketid,
-				t.clientid, 
-				t.comments, 
+				t.clientid,
+				t.comments,
 				t.assigneduser,
-				(select ts.status 
+				(select ts.status
 				 	from ticketstatus ts
 				 		where ts.ticketid = t.id
 						and ts.statusdate = (select max(ts2.statusdate)
@@ -318,17 +316,17 @@ class ticket {
 				                            		where ts.ticketid = ts2.ticketid)) as status
 					from tickets t
 						where t.assigneduser = '". $_SESSION['username'] ."'
-						and (select ts.status 
+						and (select ts.status
 				 	from ticketstatus ts
 				 		where ts.ticketid = t.id
 						and ts.statusdate = (select max(ts2.statusdate)
 					                            	from ticketstatus ts2
-				                            		where ts.ticketid = ts2.ticketid)) <> 'Closed'	
+				                            		where ts.ticketid = ts2.ticketid)) <> 'Closed'
 							order by t.opendate desc";
 		}
-				                            		                            			
-		
-				 
+
+
+
 		$result = $mysqli->query($sql);
 		echo '<table class="table"><th>Client#</th><th>Comments</th><th>Assigned</th><th>Status</th>';
 		if ($result->num_rows > 0) {
@@ -336,7 +334,7 @@ class ticket {
 			while($row = $result->fetch_assoc()) {
 				if ($row['status'] == 'Closed') { $class = "btn btn-danger";}
 				elseif ($row['status'] == 'Open') { $class = "btn btn-success";}
-				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
+				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";}
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
 				       			<td>' .$row['clientid'] .'</td>
@@ -351,27 +349,27 @@ class ticket {
 		} else {
 			echo "No Tickets with status: " . $status;
 		}
-		echo '</table>'; 
-		$mysqli->close();   	
-   	
+		echo '</table>';
+		$mysqli->close();
+
    	}
-   	
+
    	/**
    	 * displays the most recent tickets
    	 * @param clientId the client id to filter
    	 */
    	public static function displayRecentTickets() {
    		$mysqli = dbConnect();
-   		
+
    		$sql = "select
    			t.id as ticketid,
-			t.clientid, 
-			t.comments, 
+			t.clientid,
+			t.comments,
 			t.subject,
 			(select c.name from categories c where c.id = t.categoryid) as category,
 			(select sc.name from subcategories sc where sc.id = t.subcategoryid) as subcategory,
 			t.assigneduser,
-			(select ts.status 
+			(select ts.status
 			 	from ticketstatus ts
 			 		where ts.ticketid = t.id
 					and ts.statusdate = (select max(ts2.statusdate)
@@ -379,7 +377,7 @@ class ticket {
 			                            		where ts.ticketid = ts2.ticketid)) as status
 				from tickets t
 				    order by opendate desc limit 5";
-					
+
 		$result = $mysqli->query($sql);
 		echo '<table class="table"><th>Client#</th><th>Subject</th><th>Category</th><th>Sub Category</th><th>Assigned</th><th>Status</th>';
 		if ($result->num_rows > 0) {
@@ -389,7 +387,7 @@ class ticket {
 				#$comments = (strlen($comments) > 340) ? substr($comments, 0, 340) . '...' : $comments;
 				if ($row['status'] == 'Closed') { $class = "btn btn-danger";}
 				elseif ($row['status'] == 'Open') { $class = "btn btn-success";}
-				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";} 
+				elseif ($row['status'] == 'Waiting on Client') {$class = "btn btn-info";}
 				else { $class = "btn btn-warning"; }
 		       		echo '<tr>
 				       			<td>' .$row['clientid'] .'</td>
@@ -406,12 +404,12 @@ class ticket {
 		} else {
 			echo "Enter ClientId to see recent tickets.";
 		}
-		echo '</table>'; 
+		echo '</table>';
 		$mysqli->close();
-   		
+
    	}
-   	
-	
+
+
 	public function setId($id) {$this->id = $id;}
 	public function setClientId($clientId) {$this->clientId = $clientId;}
 	public function setUser($user) {$this->user = $user;}
@@ -425,7 +423,7 @@ class ticket {
 	public function setOpenDate($openDate) {$this->openDate = $openDate;}
 	public function setParentTicketId($parentTicketId) {$this->parentTicketId = $parentTicketId;}
 	public function setAssignedUser($assignedUser) {$this->assignedUser = $assignedUser;}
-	
+
 	public function getId() {return	 $this->id;}
 	public function getClientId() {return $this->clientId;}
 	public function getUser() {return $this->user;}
@@ -441,6 +439,6 @@ class ticket {
 	public function getAssignedUser() {return $this->assignedUser;}
 	public function getMysqli() {return $this->mysqli;}
 
-} 
+}
 
 ?>
