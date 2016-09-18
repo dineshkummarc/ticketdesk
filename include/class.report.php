@@ -70,6 +70,7 @@ class report {
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) { fputcsv($output, $row);	}
 			}
+			fclose($output);
 		  mysqli_close($this->mysqli);
 
 	}
