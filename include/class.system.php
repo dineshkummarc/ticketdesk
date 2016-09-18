@@ -54,7 +54,7 @@ class system {
 	public function update() {
 		$sql = "update system set value = ? where name = ?";
 		if ($update_stmt = $this->mysqli->prepare($sql)) {
-			$update_stmt->bind_param('ss',$this->name, $this->id);
+			$update_stmt->bind_param('ss',$this->value, $this->name);
 			if (! $update_stmt->execute()) {
 				return false;
 			}
