@@ -48,29 +48,29 @@ class report {
 	    fputcsv($output, array('TicketId','clientId','open_date', 'opened_by','assigned_to','details','Status','Category','SubCategory','Notes'));
 
 	    $sql = "select
-			t.id,
-			t.clientnumber,
-			t.opendate,
-			t.user,
-			t.assigneduser,
-			t.comments,
-			ts.status,
-			ts.statusdate,
-			tn.note,
-			tn.notedate
-				from tickets t, ticketnotes tn, categories c, subcategories sc,ticketstatus ts
-					where t.id = tn.ticketid
-					and ts.ticketid = t.id
-					and t.categoryid = c.id
-					and t.subcategoryid = sc.id
-						order by t.opendate desc, tn.notedate";
-        $sql = "select * from tickets";
-        $result = $this->mysqli->query($sql);
+							t.id,
+							t.clientnumber,
+							t.opendate,
+							t.user,
+							t.assigneduser,
+							t.comments,
+							ts.status,
+							ts.statusdate,
+							tn.note,
+							tn.notedate
+								from tickets t, ticketnotes tn, categories c, subcategories sc,ticketstatus ts
+									where t.id = tn.ticketid
+									and ts.ticketid = t.id
+									and t.categoryid = c.id
+									and t.subcategoryid = sc.id
+										order by t.opendate desc, tn.notedate";
+      $sql = "select * from tickets";
+      $result = $this->mysqli->query($sql);
 
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) { fputcsv($output, $row);	}
-		}
-	  mysqli_close($this->mysqli);
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) { fputcsv($output, $row);	}
+			}
+		  mysqli_close($this->mysqli);
 
 	}
 }
