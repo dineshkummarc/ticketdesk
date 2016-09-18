@@ -119,7 +119,7 @@ if ($_GET['maintenace'] == 'system') { ?>
 				  <div class="form-group">
 				    <label for="email" class="col-sm-3 control-label">Notification Email</label>
 				      <div class="col-sm-8">
-								<input class="form-control" name="email" id="email" value="<?php $systemEmail->getValue(); ?>" />
+								<input class="form-control" name="email" id="email" value="<?php echo "$systemEmail->getValue()"; ?>" />
 				      </div>
 				  </div>
 
