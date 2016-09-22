@@ -356,7 +356,6 @@ class ticket {
 
    	/**
    	 * displays the most recent tickets
-   	 * @param clientId the client id to filter
    	 */
    	public static function displayRecentTickets() {
    		$mysqli = dbConnect();
