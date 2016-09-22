@@ -1,24 +1,24 @@
-<?php 
+<?php
 include_once 'include/functions.php';
 include_once 'include/connect.php';
-sec_session_start(); 
+sec_session_start();
 
 if(login_check(dbConnect()) == true) {
 	include_once('include/navbar.php');
-	
+
         // Add your protected page content here!
 ?>
 
 <script>
-// set active menu bar 
+// set active menu bar
 $('#dashboard').addClass("active");
 
 $(document).ready(function($) {
-  
+
   $('#categoryId').change(function(e) {
     //Grab the chosen value on first select list change
     var selectvalue = $(this).val();
- 
+
     if (selectvalue == "") {
 		//Display initial prompt in target select if blank value selected
 	        $('#subCategorySelect').html("");
@@ -34,11 +34,11 @@ $(document).ready(function($) {
           }});
         }
     });
-    
+
   $('#clientId').change(function(e) {
     //Grab the chosen value on first select list change
     var selectvalue = $(this).val();
- 
+
     $.ajax({url: './include/ajax/getRecentTickets.php?svalue='+selectvalue,
             success: function(output) {
             //alert(output);
@@ -48,11 +48,11 @@ $(document).ready(function($) {
               alert(xhr.status + " "+ thrownError);
             }});
     });
-    
-    
+
+
 });
 
-</script> 
+</script>
 
 <body>
 <div id="content">
@@ -66,8 +66,6 @@ if (isset($_POST['addTicket'])) {
 		echo '<br> failed to add ticket: ' . $ticket->getMysqli()->error . '<br>';
 	} else {
 		echo '<META http-equiv="refresh" content="0;URL=./tickets.php?ticketId=' .$ticket->getId()  . '">';
-		//header('Location: ./ticket.php?ticketId=' . $ticket->getId());
-
 	}
 }
 
@@ -98,21 +96,21 @@ if (isset($_POST['addQuickTicket'])) {
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="subject" name="subject">
                     </div>
-                </div>                
+                </div>
                 <div class="form-group">
                     <label for="category" class="col-sm-2 control-label">Category</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="categoryId" name="categoryId">
                         	<?php category::displayCategoryOptionList(); ?>
-                        
+
                         </select>
                     </div>
                 </div>
-                
+
 
                 <div id="subCategorySelect"></div>
 
-                        
+
                 <div class="form-group">
                     <label for="comments" class="col-sm-2 control-label">Details</label>
                     <div class="col-sm-10">
@@ -121,24 +119,24 @@ if (isset($_POST['addQuickTicket'])) {
                 </div>
                 <div class="btn-group">
                     <button type="submit" name="addTicket" class="btn btn-primary">Create</button>
-                    <button type="submit" name="addQuickTicket" class="btn btn-success">Create & Close</button>                
+                    <button type="submit" name="addQuickTicket" class="btn btn-success">Create & Close</button>
                 </div>
                 <div class="btn-group">
                     <button type="reset" class="btn btn-warning">Reset</button>
                 </div>
             </form>
         </div>
-    </div>    
-        
+    </div>
+
     <div id="recentTickets" class="panel panel-default">
         <div class="panel-heading">Recent Tickets</div>
             <?php ticket::displayRecentTickets(); ?>
 
-    </div>   
+    </div>
 <div id="totals" class="well welroundl-sm" >
 Total Tickets: <?php echo ''. ticket::getTicketCount(); ?> <br>  Average Daily: <?php echo ''. ticket::getDailyAverage(); ?>
 </div>
-    
+
 
 
 </div> <!-- /content-->
@@ -146,9 +144,9 @@ Total Tickets: <?php echo ''. ticket::getTicketCount(); ?> <br>  Average Daily: 
 
 <?php
 // end protected content
-} else { 
+} else {
         echo 'You are not authorized to access this page redirecting you to the <a href="./index.php">login page</a>.';
-        echo '<META http-equiv="refresh" content="2;URL=./index.php">';        
+        echo '<META http-equiv="refresh" content="2;URL=./index.php">';
 }
 
 ?>
