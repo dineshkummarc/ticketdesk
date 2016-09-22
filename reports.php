@@ -31,11 +31,7 @@ if(login_check(dbConnect()) == true) {
         // Add your protected page content here!
 ?>
 
-<script>
-// set active menu bar
-$("#dashboard").removeClass("active");
-$('#reports').addClass("active");
-</script>
+<script>$('#reports').addClass("active");</script>
 
 <div id="content">
     <div id="reportMain" class="panel panel-default">
