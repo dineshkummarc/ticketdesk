@@ -142,7 +142,9 @@ INSERT INTO `system` (`id`, `name`, `value`) VALUES
 (2, 'Authentication', 'Native'),
 (3, 'system email', 'notice@ticketdesk.com'),
 (4, 'language', 'English'),
-(5, 'siteurl', 'http://devmonkeyz.com/ticketdev/');
+(5, 'siteurl', 'http://devmonkeyz.com/ticketdev/'),
+(6, 'brand', 'TicketDev');
+
 
 -- --------------------------------------------------------
 
@@ -277,4 +279,3 @@ CREATE TABLE IF NOT EXISTS `users` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
