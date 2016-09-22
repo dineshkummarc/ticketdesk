@@ -8,7 +8,6 @@ if(login_check(dbConnect()) == true) {
 
         // Add your protected page content here!
 ?>
-
 <script>
 // set active menu bar
 $('#dashboard').addClass("active");
@@ -53,6 +52,7 @@ $(document).ready(function($) {
 });
 
 </script>
+
 
 <body>
 <div id="content">

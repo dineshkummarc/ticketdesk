@@ -38,6 +38,7 @@ if (isset($_POST['updateTicket'])) {
 	$ticket->setGroupId($_POST['group']);
 	$ticket->setComments($_POST['comments']);
 	$ticket->setSubject($_POST['subject']);
+
 	if ($_POST['ticketNote'] != "") {
 		$ticket->addNote($_POST['ticketNote']);
 	}
@@ -61,10 +62,8 @@ if (isset($_POST['updateTicket'])) {
 		mail($to,$subject,$body,$headers);
 	}
 	if ($ticket->updateTicket()) {
-
 		echo 'Ticket saved!';
-		echo '<META http-equiv="refresh" content="1;URL=./main.php">';
-
+		echo '<META http-equiv="refresh" content="0;URL=./main.php">';
 	} else {
 		echo 'update failed: ' . $ticket->getMysqli()->error;
 	}

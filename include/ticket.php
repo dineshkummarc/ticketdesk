@@ -149,72 +149,84 @@ class ticket {
    				assigneduser = ?
    					where id = ?";
 		if ($update_stmt = $this->mysqli->prepare($prep_stmt)) {
-			$update_stmt->bind_param('iissiiiisi', $this->clientId,
-						$this->categoryId,
-						$this->subject,
-						$this->comments,
-						$this->subCategoryId,
-						$this->transferYn,
-						$this->groupid,
-						$this->parentTicketId,
-						$this->assignedUser,
-						$this->id);
-			if (! $update_stmt->execute()) {
-				return false;
-			} else {
-				//insert status update
-				$sql = "insert into ticketstatus (ticketId,status,statusdate) values (?,?,now())";
-				if ($insert_stmt = $this->mysqli->prepare($sql)) {
-					$insert_stmt->bind_param('is',$this->id,$this->status);
-					if (! $insert_stmt->execute()) {
-						return false;
+				$update_stmt->bind_param('iissiiiisi', $this->clientId,
+							$this->categoryId,
+							$this->subject,
+							$this->comments,
+							$this->subCategoryId,
+							$this->transferYn,
+							$this->groupid,
+							$this->parentTicketId,
+							$this->assignedUser,
+							$this->id);
+				if (! $update_stmt->execute()) {
+					return false;
+				} else {
+					//insert status update
+					$this->addEventLog();
+					$sql = "insert into ticketstatus (ticketId,status,statusdate) values (?,?,now())";
+					if ($insert_stmt = $this->mysqli->prepare($sql)) {
+						$insert_stmt->bind_param('is',$this->id,$this->status);
+						if (! $insert_stmt->execute()) {
+							return false;
+						}
 					}
 				}
 			}
-		}
-		return true;
+			return true;
    	}
 
    	/**
    	 * adds a ticket note to the ticket
    	 */
    	public function addNote($note) {
-		//insert status update
-		$sql = "insert into ticketnotes (ticketid,note,notedate,user) values (?,?,now(),?)";
-		if ($insert_stmt = $this->mysqli->prepare($sql)) {
-			$insert_stmt->bind_param('iss',$this->id,$note,$_SESSION['username']);
-			if (! $insert_stmt->execute()) {
-				return false;
+			//insert status update
+			$sql = "insert into ticketnotes (ticketid,note,notedate,user) values (?,?,now(),?)";
+			if ($insert_stmt = $this->mysqli->prepare($sql)) {
+				$insert_stmt->bind_param('iss',$this->id,$note,$_SESSION['username']);
+				if (! $insert_stmt->execute()) {
+					return false;
+				}
 			}
-		}
    	}
 
-   	/**
-   	 * get all notes
-   	 */
-   	 public function getNotes() {
-   	 	$sql = "select * from ticketnotes where ticketid =" . $this->id;
-		$result = $this->mysqli->query($sql);
-
-		if ($result->num_rows > 0) {
-			// output data of each row
-			echo '<table class="table"><th>Note</th><th>User</th><th>Date</th>';
-			while($row = $result->fetch_assoc()) {
-		       		echo '<tr><td>' .$row['note'] .
-		       		'</td><td>' . $row['user'] .
-		       		'</td><td> ' . $row['notedate'] .
-		       		'</td></tr>';
+		private function addEventLog() {
+			$sql = "insert into eventlog (ticketid,eventdate,clientid,subject,categoryid,subcategoryid,assigneduser,parentticketid,groupid,status) values (?,now(),?,?,?,?,?,?,?,?)";
+			if ($insert_stmt = $this->mysqli->prepare($sql)) {
+				$insert_stmt->bind_param('iissssiis',$this->id,$this->clientId,$this->subject,$this->categoryId,$this->subCategoryId,
+																	$this->assignedUser,$this->parentTicketId,$this->groupId,$this->status);
+				if (! $insert_stmt->execute()) {
+					return false;
+				}
 			}
-			echo '</table>';
-		} else {
-			echo "No additional notes.";
 		}
-   	 }
 
-	function __destruct() {
-       		mysqli_close($this->mysqli);
+		/**
+		* get all notes
+		*/
+		public function getNotes() {
+				$sql = "select * from ticketnotes where ticketid =" . $this->id;
+				$result = $this->mysqli->query($sql);
 
-   	}
+				if ($result->num_rows > 0) {
+						// output data of each row
+						echo '<table class="table"><th>Note</th><th>User</th><th>Date</th>';
+						while($row = $result->fetch_assoc()) {
+								echo '<tr><td>' .$row['note'] .
+								'</td><td>' . $row['user'] .
+								'</td><td> ' . $row['notedate'] .
+								'</td></tr>';
+						}
+						echo '</table>';
+				} else {
+					echo "No additional notes.";
+				}
+    }
+
+		function __destruct() {
+		     		mysqli_close($this->mysqli);
+
+		}
 
    	/**
    	 * Gets the total number of tickets in the system
@@ -223,17 +235,17 @@ class ticket {
    	public static function getTicketCount() {
    		$mysqli = dbConnect();
    		$sql = "select count(*) as numberOfTickets from tickets";
-		$result = $mysqli->query($sql);
+			$result = $mysqli->query($sql);
 
-		if ($result->num_rows > 0) {
-			// output data of each row
-			while($row = $result->fetch_assoc()) {
-		       		return $row['numberOfTickets'];
+			if ($result->num_rows > 0) {
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+			       		return $row['numberOfTickets'];
+				}
+			} else {
+				echo "0";
 			}
-		} else {
-			echo "0";
-		}
-		$mysqli->close();
+			$mysqli->close();
 
    	}
    	/**

@@ -26,8 +26,6 @@ if(login_check(dbConnect()) == true) {
 	// need to include navbar after posting to modify the headers--otherwise header already sent error.
 	include_once('include/navbar.php');
 
-
-
         // Add your protected page content here!
 ?>
 
