@@ -17,12 +17,6 @@ include_once('include/class.system.php');
 
 $systemBrand = system::withName('brand'); # get branding for nav bar
 
-/*
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-*/
-
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -63,8 +57,6 @@ error_reporting(E_ALL);
                         <li><a href="./system.php?maintenace=groups">Groups</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="./system.php?maintenace=system">System</a></li>
-
-
                     </ul>
                 </li>
             </ul>
