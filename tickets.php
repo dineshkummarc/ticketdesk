@@ -52,7 +52,7 @@ if (isset($_POST['updateTicket'])) {
 		$subject = "Ticketdesk - Ticket Assignment";
 		$from = $systemEmail->getValue();
 		$body = 'Hi ' .$ticket->getAssignedUser() . ', <br/> <br/>Ticket id: '. $ticket->getId() .
-						' has been assigned to you Click <a href="http://' . $systemSiteUrl->getValue() .'tickets.php?ticketId='. $ticket->getId() .
+						' has been assigned to you Click <a href="http://' . $systemSiteUrl->getValue() .'/tickets.php?ticketId='. $ticket->getId() .
 						'">here</a> to view the ticket<br/>';
 		$headers = "From: " . strip_tags($from) . "\r\n";
 		$headers .= "Reply-To: ". strip_tags($from) . "\r\n";
