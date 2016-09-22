@@ -49,46 +49,28 @@ if (isset($_POST['saveSettings'])) {
 	$setting->setValue($_POST['email']);
 	$setting->update();
 
-	# save brand info
 	$setting->setName('brand');
 	$setting->setValue($_POST['brand']);
 	$setting->update();
-}
 
+	$setting->setName('siteurl');
+	$setting->setValue($_POST['siteurl']);
+	$setting->update();
+
+	$setting->setName('siteurl');
+	$setting->setValue($_POST['siteurl']);
+	$setting->update();
+
+	$setting->setName('system email');
+	$setting->setValue($_POST['email']);
+	$setting->update();
+
+
+}
 ?>
 
-<script>
 // set active menu bar
-$("#dashboard").removeClass("active");
-$("#reports").removeClass("active");
-$('#tickets').removeClass("active");
-$('#system').addClass("active");
-
-
-$(document).ready(function($) {
-
-  $('#selectCategory').change(function(e) {
-    //Grab the chosen value on first select list change
-    var selectvalue = $(this).val();
-
-    if (selectvalue == "") {
-		//Display initial prompt in target select if blank value selected
-	        $('#subCategoryDisplay').html("");
-    } else {
-      //Make AJAX request, using the selected value as the GET
-      $.ajax({url: './include/ajax/getSubCategory.php?svalue='+selectvalue,
-             success: function(output) {
-                //alert(output);
-                $('#subCategoryDisplay').html(output);
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-        }
-    });
-});
-
-</script>
+<script>$('#system').addClass("active");</script>
 
 <body>
 <?php
@@ -105,13 +87,19 @@ if ($_GET['maintenace'] == 'system') { ?>
 		   			$systemV = system::withName('version');
 		   			$systemAuthentication = system::withName('Authentication');
 		   			$systemLanguage = system::withName('language');
-						$systemEmail = system::withName('email');
+						$systemEmail = system::withName('system email');
 						$systemBrand = system::withName('brand'); # get branding for nav bar
+						$systemUrl = system::withName('siteurl');
 		   		?>
 
-		        	<p>version <?php echo ''. $systemV->getValue(); ?></p>
-
 				<form class="form" method="post">
+					<div class="form-group">
+				    <label for="version" class="col-sm-3 control-label">System Version</label>
+				      <div class="col-sm-8">
+								<input class="form-control" name="version" id="version" value="<?php echo ''.  $systemV->getValue(); ?> " disabled="true" />
+				      </div>
+				  </div>
+
 				  <div class="form-group">
 				    <label for="authentication" class="col-sm-3 control-label">Authentication</label>
 				      <div class="col-sm-8">
@@ -142,6 +130,13 @@ if ($_GET['maintenace'] == 'system') { ?>
 				    <label for="brand" class="col-sm-3 control-label">Brand</label>
 				      <div class="col-sm-8">
 								<input class="form-control" name="brand" id="brand" value="<?php echo ''. $systemBrand->getValue(); ?>" />
+				      </div>
+				  </div>
+
+					<div class="form-group">
+				    <label for="siteurl" class="col-sm-3 control-label">Site url</label>
+				      <div class="col-sm-8">
+								<input class="form-control" name="siteurl" id="brand" value="<?php echo ''. $systemUrl->getValue(); ?>" />
 				      </div>
 				  </div>
 
