@@ -29,12 +29,12 @@ class ticket {
 	private $openDate;
 	private $parentTicketId;
 	private $assignedUser;
+	private $attachemnt;
 	private $mysqli;
 
 	function __construct() {
 		$this->mysqli = dbConnect();
 	}
-
 
 	public static function withParams($ticketParameters) {
 		$instance = new self();
@@ -50,11 +50,12 @@ class ticket {
        		$instance->openDate = $ticketParameters['openDate'];
        		$instance->parentTicketId = $ticketParameters['parentTicketId'];
        		$instance->assignedUser = $ticketParameters['assignedUser'];
+
        		return $instance;
    	}
 
    	/**
-    	 * Adds the ticket to the database
+     * Adds the ticket to the database
    	 */
    	public function addTicket($isClosed) {
 			$prep_stmt = "insert into tickets (clientid,user,subject,categoryid,subcategoryid,comments,transferYn,groupId,openDate,parentTicketId,assignedUser)" .

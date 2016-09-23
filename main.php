@@ -129,20 +129,6 @@ if (isset($_POST['addQuickTicket'])) {
                     </div>
                 </div>
 
-								<div class="form-group">
-									<label for="comments" class="col-sm-2 control-label">Upload</label>
-										<div class="col-sm-10">
-											<div class="input-group">
-												<input type="text" class="form-control" readonly>
-					                <label class="input-group-btn">
-					                    <span class="btn btn-default">
-					                        Browse...<input id="fileToUpload" type="file" style="display: none;" multiple>
-					                    </span>
-					                </label>
-					            </div>
-										</div>
-                </div>
-
                 <div class="btn-group">
                     <button type="submit" name="addTicket" class="btn btn-primary">Create</button>
                     <button type="submit" name="addQuickTicket" class="btn btn-success">Create & Close</button>
