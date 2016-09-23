@@ -249,10 +249,10 @@ class ticket {
 		* get attachment by name
 		*/
 		private function getAttachmentByName($name) {
-			$sql = "select * from ticketAttachments where ticketid =" . $this->id . " and filename='" . $name . "'";
+			$sql = "select * from ticketattachments where ticketid =" . $this->id . " and filename='" . $name . "'";
 			$result = $this->mysqli->query($sql);
 			$filePath = '';
-			var_dump($sql);
+
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					$filePath =  $row['filepath'];
