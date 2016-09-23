@@ -90,7 +90,7 @@ if (isset($_POST['updateTicket'])) {
 
 	if ($ticket->updateTicket()) {
 		echo 'Ticket saved!';
-		echo '<META http-equiv="refresh" content="10;URL=./main.php">';
+		echo '<META http-equiv="refresh" content="0;URL=./main.php">';
 	} else {
 		echo 'update failed: ' . $ticket->getMysqli()->error;
 	}
@@ -220,16 +220,15 @@ if (isset($_POST['updateTicket'])) {
 			                </div>
 
 
-			                <div class="form-group">
-			                    <label for="assignedUser" class="col-sm-2 control-label">Assigned User:</label>
-			                    <div class="col-sm-10">
-			        		<select class="form-control" name="assignedUser">
-			        			<option value="<?php echo ''. $ticket->getAssignedUser();?> "> <?php echo ''. $ticket->getAssignedUser();?></option>
-			   				<?php user::displayUserOptionList(); ?>
-
-			        		</select>
-			                    </div>
-			                </div>
+											<div class="form-group">
+												<label for="assignedUser" class="col-sm-2 control-label">Assigned User:</label>
+												<div class="col-sm-10">
+													<select class="form-control" name="assignedUser">
+														<option value="<?php echo ''. $ticket->getAssignedUser();?> "> <?php echo ''. $ticket->getAssignedUser();?></option>
+														<?php user::displayUserOptionList(); ?>
+													</select>
+												</div>
+											</div>
 
 											<div class="form-group">
 												<label for="comments" class="col-sm-2 control-label">Upload</label>
@@ -244,8 +243,17 @@ if (isset($_POST['updateTicket'])) {
 								            </div>
 													</div>
 			                </div>
+											<div class="form-group">
+												 <label for="comments" class="col-sm-2 control-label">Attachments </label>
+												 <div class="col-sm-10"><?php $ticket->linkAttachments(); ?></div>
+											</div>
 
-					<button name="updateTicket" class="btn btn-primary" type="submit">Update</button>
+											<div class="form-group row">
+									      <div class="offset-sm-2 col-sm-10">
+									        <button name="updateTicket" class="btn btn-primary" type="submit">Update</button>
+									      </div>
+									    </div>
+
 
 
 	        		</form>

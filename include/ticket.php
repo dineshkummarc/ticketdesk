@@ -213,14 +213,51 @@ class ticket {
 		*/
 		private function addAttachment(){
 			$target_dir = "uploads/";
-			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$fileName =  basename($_FILES["fileToUpload"]["name"]);
+			$target_file = $target_dir . $fileName . date("Ymd\_His");
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+					# save file location in database
+					$sql = "insert into ticketattachments (ticketid,filepath,filename,filetype) values (?,?,?,null);";
+					if ($insert_stmt = $this->mysqli->prepare($sql)) {
+						$insert_stmt->bind_param('iss',$this->id,$target_file,$fileName);
+						if (! $insert_stmt->execute()) {
+							return false;
+						}
+					}
 	    } else {
-	        echo "No file was uploaded";
-						echo '<Br>target_file: '. $target_file . '<br>';
+	        echo "<br>No file was uploaded";
 	    }
 
+		}
+
+		/**
+		* display all attachemnts linked to ticket
+		*/
+		public function linkAttachments() {
+			$sql = "select * from ticketAttachments where ticketid =" . $this->id;
+			$result = $this->mysqli->query($sql);
+
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					echo '<a href="'. $row['filepath'] . '" target="blank">'. $row['filename'] . '</a> ';
+				}
+			}
+		}
+
+		/**
+		* get attachment by name
+		*/
+		private function getAttachmentByName($name) {
+			$sql = "select * from ticketAttachments where ticketid =" . $this->id . " and filename='" . $name . "'";
+			$result = $this->mysqli->query($sql);
+			$filePath = '';
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					$filePath =  $row['filepath'];
+				}
+			}
+			return $filePath;
 		}
 
 		/**
@@ -234,7 +271,20 @@ class ticket {
 						// output data of each row
 						echo '<table class="table"><th>Note</th><th>User</th><th>Date</th>';
 						while($row = $result->fetch_assoc()) {
-								echo '<tr><td>' .$row['note'] .
+								$note = $row['note'];
+
+								# if there are image tags in the note parse them and display the image...
+								if (strpos($note, '[img]') !== false) {
+									$m = substr($note, strpos($note, '[img]')+5);
+									$fileName = substr($m, 0, strpos($m, '[/img]'));
+									$filePath = $this->getAttachmentByName($fileName); # get the actual file name on the sys not the one they are unplaoding
+
+									$note = str_replace('[img]','<img src=',$note);
+									$note = str_replace('[/img]',' >',$note);
+									$note = str_replace($fileName, $filePath,$note);
+								}
+
+								echo '<tr><td>' . $note .
 								'</td><td>' . $row['user'] .
 								'</td><td> ' . $row['notedate'] .
 								'</td></tr>';

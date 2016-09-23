@@ -273,3 +273,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- create tickets attachment table
+create table ticketattachments (
+ticketid bigint not null,
+filepath varchar(200),
+filetype varchar(50),
+filename varchar(50)
+);
