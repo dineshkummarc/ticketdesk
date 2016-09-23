@@ -14,6 +14,17 @@ $('#dashboard').addClass("active");
 
 $(document).ready(function($) {
 
+	$(':file').on('fileselect', function(event, numFiles, label) {
+			var input = $(this).parents('.input-group').find(':text'),
+					log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+			if( input.length ) {
+					input.val(log);
+			} else {
+					if( log ) alert(log);
+			}
+	});
+
   $('#categoryId').change(function(e) {
     //Grab the chosen value on first select list change
     var selectvalue = $(this).val();
@@ -46,11 +57,17 @@ $(document).ready(function($) {
             error: function (xhr, ajaxOptions, thrownError) {
               alert(xhr.status + " "+ thrownError);
             }});
-    });
+  });
 
+	// We can attach the `fileselect` event to all file inputs on the page
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
 
 });
-
 </script>
 
 
@@ -58,8 +75,6 @@ $(document).ready(function($) {
 <div id="content">
 
 <?php
-
-
 if (isset($_POST['addTicket'])) {
 	$ticket = ticket::withParams($_POST);
 	if (!$ticket->addTicket(false)) {
@@ -83,7 +98,7 @@ if (isset($_POST['addQuickTicket'])) {
     <div id="newTicket" class="panel panel-default">
         <div class="panel-heading">New Ticket</div>
         <div class="panel-body">
-            <form class="form-horizontal" method="POST" action="#">
+            <form class="form-horizontal" method="POST" action="#" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="text" name="user" value="<?php echo '' . $_SESSION['username']; ?>" hidden />
                     <label for="clientId" class="col-sm-2 control-label">Client #</label>
@@ -106,17 +121,28 @@ if (isset($_POST['addQuickTicket'])) {
                         </select>
                     </div>
                 </div>
-
-
                 <div id="subCategorySelect"></div>
-
-
                 <div class="form-group">
                     <label for="comments" class="col-sm-2 control-label">Details</label>
                     <div class="col-sm-10">
                         <textarea class="form-control verticalonly" name="comments" placeholder="Detailed info for this ticket..."></textarea>
                     </div>
                 </div>
+
+								<div class="form-group">
+									<label for="comments" class="col-sm-2 control-label">Upload</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<input type="text" class="form-control" readonly>
+					                <label class="input-group-btn">
+					                    <span class="btn btn-default">
+					                        Browse...<input id="fileToUpload" type="file" style="display: none;" multiple>
+					                    </span>
+					                </label>
+					            </div>
+										</div>
+                </div>
+
                 <div class="btn-group">
                     <button type="submit" name="addTicket" class="btn btn-primary">Create</button>
                     <button type="submit" name="addQuickTicket" class="btn btn-success">Create & Close</button>
