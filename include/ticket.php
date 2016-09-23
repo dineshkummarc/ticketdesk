@@ -252,6 +252,7 @@ class ticket {
 			$sql = "select * from ticketAttachments where ticketid =" . $this->id . " and filename='" . $name . "'";
 			$result = $this->mysqli->query($sql);
 			$filePath = '';
+			var_dump($sql);
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					$filePath =  $row['filepath'];
@@ -278,7 +279,7 @@ class ticket {
 									$m = substr($note, strpos($note, '[img]')+5);
 									$fileName = substr($m, 0, strpos($m, '[/img]'));
 									$filePath = $this->getAttachmentByName($fileName); # get the actual file name on the sys not the one they are unplaoding
-									var_dump($filePath);
+
 									$note = str_replace('[img]','<img src=',$note);
 									$note = str_replace('[/img]',' >',$note);
 									$note = str_replace($fileName, $filePath,$note);
