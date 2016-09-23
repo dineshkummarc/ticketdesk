@@ -278,7 +278,7 @@ class ticket {
 									$m = substr($note, strpos($note, '[img]')+5);
 									$fileName = substr($m, 0, strpos($m, '[/img]'));
 									$filePath = $this->getAttachmentByName($fileName); # get the actual file name on the sys not the one they are unplaoding
-
+									var_dump($filePath);
 									$note = str_replace('[img]','<img src=',$note);
 									$note = str_replace('[/img]',' >',$note);
 									$note = str_replace($fileName, $filePath,$note);
