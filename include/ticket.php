@@ -133,7 +133,6 @@ class ticket {
 
    }
 
-
    	/**
    	 * update the ticket info
    	 */
@@ -163,8 +162,11 @@ class ticket {
 				if (! $update_stmt->execute()) {
 					return false;
 				} else {
-					//insert status update
+					# insert status update
 					$this->addEventLog();
+					$this->addAttachment();
+
+					# TODO remove this section and refractor the ticket status into the ecent log
 					$sql = "insert into ticketstatus (ticketId,status,statusdate) values (?,?,now())";
 					if ($insert_stmt = $this->mysqli->prepare($sql)) {
 						$insert_stmt->bind_param('is',$this->id,$this->status);
@@ -191,6 +193,10 @@ class ticket {
 			}
    	}
 
+		/**
+		* adds ticekt change info into the event log table
+		*
+		*/
 		private function addEventLog() {
 			$sql = "insert into eventlog (ticketid,eventdate,clientid,subject,categoryid,subcategoryid,assigneduser,parentticketid,groupid,status) values (?,now(),?,?,?,?,?,?,?,?)";
 			if ($insert_stmt = $this->mysqli->prepare($sql)) {
@@ -200,6 +206,21 @@ class ticket {
 					return false;
 				}
 			}
+		}
+
+		/**
+		* adds an attachemnt
+		*/
+		private function addAttachment(){
+			$target_dir = "uploads/";
+			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	    } else {
+	        echo "No file was uploaded";
+						echo '<Br>target_file: '. $target_file . '<br>';
+	    }
+
 		}
 
 		/**
@@ -226,7 +247,6 @@ class ticket {
 
 		function __destruct() {
 		     		mysqli_close($this->mysqli);
-
 		}
 
    	/**
@@ -249,6 +269,7 @@ class ticket {
 			$mysqli->close();
 
    	}
+
    	/**
    	 * gets the average number of tickets daily
    	 *
@@ -274,12 +295,10 @@ class ticket {
 
 		}
 
-
    	/**
    	 * displays lists of tickets
    	 *
    	 */
-
    	public static function displayTickets($status) {
    		$mysqli = dbConnect();
    		$sql = "select
@@ -362,8 +381,8 @@ class ticket {
 		} else {
 			echo "No Tickets with status: " . $status;
 		}
-		echo '</table>';
-		$mysqli->close();
+			echo '</table>';
+			$mysqli->close();
 
    	}
 
@@ -435,6 +454,7 @@ class ticket {
 	public function setOpenDate($openDate) {$this->openDate = $openDate;}
 	public function setParentTicketId($parentTicketId) {$this->parentTicketId = $parentTicketId;}
 	public function setAssignedUser($assignedUser) {$this->assignedUser = $assignedUser;}
+	public function setAttachment($attachment) {$this->attachment = $attachment;}
 
 	public function getId() {return	 $this->id;}
 	public function getClientId() {return $this->clientId;}
@@ -450,6 +470,7 @@ class ticket {
 	public function getParentTicketId() {return $this->parentTicketId;}
 	public function getAssignedUser() {return $this->assignedUser;}
 	public function getMysqli() {return $this->mysqli;}
+	public function getAttachment() {return $this->attachment;}
 
 }
 

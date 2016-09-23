@@ -14,17 +14,6 @@ $('#dashboard').addClass("active");
 
 $(document).ready(function($) {
 
-	$(':file').on('fileselect', function(event, numFiles, label) {
-			var input = $(this).parents('.input-group').find(':text'),
-					log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-			if( input.length ) {
-					input.val(log);
-			} else {
-					if( log ) alert(log);
-			}
-	});
-
   $('#categoryId').change(function(e) {
     //Grab the chosen value on first select list change
     var selectvalue = $(this).val();
@@ -57,14 +46,6 @@ $(document).ready(function($) {
             error: function (xhr, ajaxOptions, thrownError) {
               alert(xhr.status + " "+ thrownError);
             }});
-  });
-
-	// We can attach the `fileselect` event to all file inputs on the page
-  $(document).on('change', ':file', function() {
-    var input = $(this),
-        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [numFiles, label]);
   });
 
 });

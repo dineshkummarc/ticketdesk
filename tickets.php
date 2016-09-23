@@ -7,8 +7,33 @@ if(login_check(dbConnect()) == true) {
 	include_once('include/navbar.php');
         // Add your protected page content here!
 ?>
-// set active menu bar
-<script>$('#tickets').addClass("active");</script>
+
+<script>
+$('#tickets').addClass("active");
+
+$(document).ready(function($) {
+
+	$(':file').on('fileselect', function(event, numFiles, label) {
+			var input = $(this).parents('.input-group').find(':text'),
+					log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+			if( input.length ) {
+					input.val(log);
+			} else {
+					if( log ) alert(log);
+			}
+	});
+ });
+
+// We can attach the `fileselect` event to all file inputs on the page
+$(document).on('change', ':file', function() {
+	var input = $(this),
+			numFiles = input.get(0).files ? input.get(0).files.length : 1,
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+	input.trigger('fileselect', [numFiles, label]);
+});
+
+</script>
 
 <body>
 
@@ -39,9 +64,10 @@ if (isset($_POST['updateTicket'])) {
 	$ticket->setComments($_POST['comments']);
 	$ticket->setSubject($_POST['subject']);
 
-	if ($_POST['ticketNote'] != "") {
-		$ticket->addNote($_POST['ticketNote']);
-	}
+	# add note if applicable
+	if ($_POST['ticketNote'] != "") {	$ticket->addNote($_POST['ticketNote']); }
+
+	# notify a user when a ticket is assigned to them
 	if ($_POST['previousAssignedUser'] != $_POST['assignedUser']) {
 		$user = user::withUserName($ticket->getAssignedUser());
 
@@ -61,27 +87,13 @@ if (isset($_POST['updateTicket'])) {
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		mail($to,$subject,$body,$headers);
 	}
+
 	if ($ticket->updateTicket()) {
 		echo 'Ticket saved!';
-		echo '<META http-equiv="refresh" content="0;URL=./main.php">';
+		echo '<META http-equiv="refresh" content="10;URL=./main.php">';
 	} else {
 		echo 'update failed: ' . $ticket->getMysqli()->error;
 	}
-
-
-/*
-echo 'clientId = '. $ticket->getclientId();
-echo '<br>user = '. $ticket->getUser();
-echo '<br>category = '. $ticket->getCategoryId();
-echo '<br>sub category = '. $ticket->getSubCategoryId();
-echo '<br>TransferYn = '. $ticket->getTransferYn();
-echo '<br>TransferDeptId = '. $ticket->getTransferDeptId();
-echo '<br>OpenDate = '. $ticket->getOpenDate();
-echo '<br>Assigned User = '. $ticket->getAssignedUser();
-echo '<br>';
-	*/
-
-	// add note
 
 }
 ?>
@@ -121,7 +133,7 @@ echo '<br>';
         	?>
 			<div class="panel-body">
         			<div class="well">
-				<form class="form" method="POST">
+				<form class="form" method="POST" enctype="multipart/form-data">
 					<input type="text" name="ticketId" value="<?php echo ''. $ticket->getId(); ?>" hidden />
 					<input type="text" name="previousAssignedUser" value="<?php echo '' . $ticket->getAssignedUser();?>" hidden />
 			                <div class="form-group">
@@ -226,7 +238,7 @@ echo '<br>';
 															<input type="text" class="form-control" readonly>
 								                <label class="input-group-btn">
 								                    <span class="btn btn-default">
-								                        Browse...<input id="fileToUpload" type="file" style="display: none;" multiple>
+								                        Browse...<input id="fileToUpload" name="fileToUpload" type="file" style="display: none;" multiple>
 								                    </span>
 								                </label>
 								            </div>
