@@ -12,4 +12,5 @@ The install process is fairly manual. We'll make automated install scripts in th
 6. (optional) For email notifications you'll also need an smtp server running on port 25
 
 ## Road map
-Check the issues section theres quite a few things to do
+Check the issues section there are a few items and enhancements that still need to be developed. The largest remaining task is implementing multiple languages.
+
