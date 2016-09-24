@@ -1,12 +1,15 @@
-# ticketdesk
-A central ticketing system for help desk or call center
+# Ticket Desk
+Centralized ticketing system for a help desk, call center, dev team, or whatever you need. Check out a live demo here: http://devmonkeyz.com/ticketdev/ it's always running the latest code and anyone can register. 
 
 ## Install
-1. Set up a LAMP server
-2. Create a database in MySQL named:ticket32145 ...or whatever you want but then you'll need to edit /includes/connect.php appropriatley
-3. Run the ticket31245.sql to create the tables
-4. Create a MySQL user and grant it insert,delete,update, and select to your database. Put the credentials in /includes/connect.php
-4. Drop the code in your webroot and you're good to go
+The install process is fairly manual. We'll make automated install scripts in the future.
+
+1. Set up a LAMP server (WAMP also tested, it's just easier on linux :D)
+2. Create a MySQL database and user with insert, delete, update and select rights
+3. Edit the /includes/connect.php with the new database name, user, and password
+4. Run the ticket31245.sql script to create the tables
+5. Place the code into your web root folder
+6. (optional) For email notifications you'll also need an smtp server running on port 25
 
 ## Road map
 Check the issues section theres quite a few things to do
