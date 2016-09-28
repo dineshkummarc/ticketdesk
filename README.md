@@ -7,7 +7,7 @@ The install process is fairly manual. We'll make automated install scripts in th
 1. Set up a LAMP server (WAMP also tested, it's just easier on linux :D)
 2. Create a MySQL database and user with insert, delete, update and select rights
 3. Edit the /includes/connect.php with the new database name, user, and password
-4. Run the ticket31245.sql script to create the tables
+4. Run the install.sql script to create the tables
 5. Place the code into your web root folder
 6. (optional) For email notifications you'll also need an smtp server running on port 25
 
